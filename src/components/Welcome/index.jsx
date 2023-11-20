@@ -1,7 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Grid, Stack, Typography } from "@mui/material";
-import { IMG_URL_LB_HVBT } from "../../constants/appConstants";
 
 function Welcome(props) {
   return (
@@ -11,11 +10,10 @@ function Welcome(props) {
         container
         columns={16}
         width={"100%"}
-        direction={"row"}
         justifyContent={"center"}
         borderTop={"0.5px solid #D9D9D9"}
       >
-        <Grid direction={"row"} m={2} px={2}>
+        <Grid m={2} px={2}>
           <Stack width={"100%"} direction={"column"} spacing={2}>
             <Typography
               align="center"
@@ -53,9 +51,9 @@ function Welcome(props) {
                 height="400"
                 src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </Stack>
 
