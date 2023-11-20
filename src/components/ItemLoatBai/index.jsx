@@ -1,9 +1,14 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Stack, Typography } from "@mui/material";
-import { IMG_URL_LB_HVBT } from "../../constants/appConstants";
 
 function ItemLoatBai(props) {
+  const [title, setTitle] = React.useState(props.title);
+  const [category, setCategory] = React.useState(props.category);
+  const [description, setDescription] = React.useState(props.description);
+  const [btnText, setBtnText] = React.useState(props.btnText);
+  const [img, setImg] = React.useState(props.img);
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -23,7 +28,7 @@ function ItemLoatBai(props) {
               color={"#D2302C"}
               textTransform={"uppercase"}
             >
-              Loạt bài
+              {title}
             </Typography>
             <Typography
               align="left"
@@ -33,7 +38,7 @@ function ItemLoatBai(props) {
               color={"#D2302C"}
               textTransform={"uppercase"}
             >
-              Hiểu về bản thân
+              {category}
             </Typography>
             <Typography
               align="justify"
@@ -42,12 +47,7 @@ function ItemLoatBai(props) {
               fontWeight={"Regular"}
               color={"#FFFF"}
             >
-              Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm
-              yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của
-              mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có
-              thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính
-              là những nền tảng quan trọng để chúng ta xây dựng cho mình một
-              cuộc đời đáng sống sau này.
+              {description}
             </Typography>
             <Stack alignItems={"flex-start"}>
               <Button
@@ -61,7 +61,7 @@ function ItemLoatBai(props) {
                   fontFamily: "Open Sans",
                 }}
               >
-                Xem toàn bộ loạt bài
+                {btnText}
               </Button>
             </Stack>
           </Stack>
@@ -73,25 +73,8 @@ function ItemLoatBai(props) {
             justifyContent={"center"}
           >
             <Stack direction={"row"} p={2}>
-              <img
-                src={IMG_URL_LB_HVBT}
-                width="100%"
-                height="auto"
-                maxWidth="100%"
-                alt="Xem toàn bộ loạt bài"
-              ></img>
+              <img src={img} width="100%" height="auto" alt={category}></img>
             </Stack>
-            {/* <iframe
-              width="100%"
-              height="100%"
-              maxWidth="100%"
-              maxHeight="50%"
-              src="https://www.youtube.com/embed/72V-K9BlpWg?si=5mLLFmMBapUFe21K"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe> */}
           </Stack>
         </Stack>
       </Stack>

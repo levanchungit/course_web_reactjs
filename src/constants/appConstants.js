@@ -37,3 +37,36 @@ export const MENU_ITEMS = [
     url: "/#",
   },
 ];
+
+export const LIST_LOAT_BAI = [
+  {
+    id: 1,
+    title: "Loạt bài",
+    category: "Hiểu về bản thân",
+    description:
+      "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
+    btnText: "Xem toàn bộ loạt bài",
+    img: IMG_URL_LB_HVBT,
+    visible: true,
+  },
+  {
+    id: 2,
+    title: "Loạt bài",
+    category: "Hiểu về bản thân",
+    description:
+      "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
+    btnText: "Xem toàn bộ loạt bài",
+    img: IMG_URL_LB_HVBT,
+    visible: true,
+  },
+  {
+    id: 3,
+    title: "Loạt bài",
+    category: "Hiểu về bản thân",
+    description:
+      "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
+    btnText: "Xem toàn bộ loạt bài",
+    img: IMG_URL_LB_HVBT,
+    visible: true,
+  },
+];
