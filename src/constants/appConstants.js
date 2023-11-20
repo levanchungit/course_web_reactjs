@@ -5,6 +5,9 @@ export const LOGO_URL =
 export const IMG_URL_LB_HVBT =
   "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2147947977/settings_images/24b6bd-668d-6010-41-d4b528e5b1ef_ck3-4.jpg";
 
+export const IMG_URL_GIOI_THIEU =
+  "https://res.cloudinary.com/ddfyyysdw/image/upload/v1700488247/hmikqxxfgizfjzjfc1qa.png";
+
 export const MENU_ITEMS = [
   {
     name: "Trang chủ",
