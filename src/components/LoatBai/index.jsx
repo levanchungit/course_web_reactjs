@@ -14,6 +14,7 @@ function LoatBai(props) {
               category={item.category}
               description={item.description}
               btnText={item.btnText}
+              href={item.href}
               img={item.img}
             />
           )

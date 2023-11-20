@@ -11,7 +11,7 @@ export const IMG_URL_GIOI_THIEU =
 export const MENU_ITEMS = [
   {
     name: "Trang chủ",
-    url: "#",
+    url: "/",
   },
   {
     name: "LẬP TRÌNH",
@@ -19,7 +19,7 @@ export const MENU_ITEMS = [
   },
   {
     name: "Podcast",
-    url: "/#",
+    url: "/podcast",
   },
   {
     name: "Chạy bộ",
@@ -49,7 +49,8 @@ export const LIST_LOAT_BAI = [
     description:
       "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
     btnText: "Xem toàn bộ loạt bài",
-    img: IMG_URL_LB_HVBT,
+    img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2147947977/settings_images/11f538e-136-b242-4786-66f2d855a56b_139.jpeg",
+    href: "#",
     visible: true,
   },
   {
@@ -59,7 +60,8 @@ export const LIST_LOAT_BAI = [
     description:
       "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
     btnText: "Xem toàn bộ loạt bài",
-    img: IMG_URL_LB_HVBT,
+    img: "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2147947977/settings_images/11f538e-136-b242-4786-66f2d855a56b_139.jpeg",
+    href: "#",
     visible: true,
   },
   {
@@ -70,6 +72,55 @@ export const LIST_LOAT_BAI = [
       "Chỉ có thấu hiểu về bản thân mình, biết được đâu là điểm mạnh điểm yếu, hiểu được cách suy nghĩ, cách vận hành những cảm xúc của mình,.. Chỉ khi hiểu rõ tường tận về bản thân thì chúng ta mới có thể thiết kế cho mình một cuộc sống phù hợp. Và từ đó, nó sẽ chính là những nền tảng quan trọng để chúng ta xây dựng cho mình một cuộc đời đáng sống sau này.",
     btnText: "Xem toàn bộ loạt bài",
     img: IMG_URL_LB_HVBT,
+    href: "#",
     visible: true,
+  },
+];
+
+export const LIST_PODCASTS = [
+  {
+    id: 1,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 2,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 3,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 4,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 5,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 6,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 7,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 8,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
+  },
+  {
+    id: 9,
+    href: "https://www.youtube.com/watch?v=jrVhUjiB9Pk?si=ISQhl-a53NxLKONT",
+    title: "Podcast 1",
   },
 ];
