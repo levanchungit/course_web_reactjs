@@ -5,6 +5,8 @@ import Welcome from "./components/Welcome";
 import LoatBai from "./components/LoatBai";
 import GioiThieu from "./components/GioiThieu";
 import Podcast from "./components/Podcast";
+import DialogHoiDap from "./components/DialogHoiDap";
+
 function App() {
   return (
     <div className="App">
@@ -14,6 +16,7 @@ function App() {
       <GioiThieu /> */}
 
       <Podcast />
+      <DialogHoiDap />
     </div>
   );
 }
