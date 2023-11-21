@@ -9,7 +9,7 @@ const ButtonCustom = ({ btnText, onClick, ...restProps }) => {
         color: "#D2302C",
         borderRadius: "10px",
         textTransform: "none",
-        fontSize: "90%",
+        fontSize: "1rem",
         fontWeight: "bold",
         fontFamily: "Open Sans",
       }}

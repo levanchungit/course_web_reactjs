@@ -14,7 +14,7 @@ function GioiThieu(props) {
         borderTop={"0.5px solid #D9D9D9"}
       >
         <Stack
-          width={"70%"}
+          width={"80%"}
           direction={"row"}
           px={2}
           spacing={2}

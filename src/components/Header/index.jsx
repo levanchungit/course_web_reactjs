@@ -2,7 +2,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import { Avatar, Stack, IconButton, Typography } from "@mui/material";
+import { Stack, IconButton } from "@mui/material";
 import { MENU_ITEMS, LOGO_URL } from "../../constants/appConstants";
 import { useMediaQuery } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
