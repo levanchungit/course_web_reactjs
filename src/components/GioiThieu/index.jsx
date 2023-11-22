@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mui/material";
 import { URL_INFO } from "../../constants/appConstants";
 function GioiThieu(props) {
   const isSmallScreen = useMediaQuery("(max-width:899px)");
-  const isVerySmallScreen = useMediaQuery("(max-width:399px)");
+  const isVerySmallScreen = useMediaQuery("(max-width:499px)");
 
   return (
     <React.Fragment>
@@ -35,7 +35,7 @@ function GioiThieu(props) {
         >
           <Stack
             spacing={2}
-            width={isVerySmallScreen ? "100%" : "60%"}
+            width={isVerySmallScreen ? "100%" : "50%"}
             direction={"column"}
           >
             <Typography
