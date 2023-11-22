@@ -1,15 +1,11 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Stack, Typography, Link } from "@mui/material";
+import { Stack, Typography, Link } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import ButtonCustom from "../ButtonCustom";
 
-function ItemLoatBai(props) {
-  const [title, setTitle] = React.useState(props.title);
-  const [category, setCategory] = React.useState(props.category);
-  const [description, setDescription] = React.useState(props.description);
-  const [btnText, setBtnText] = React.useState(props.btnText);
-  const [img, setImg] = React.useState(props.img);
-  const [href, setHref] = React.useState(props.href);
-
+function ItemLoatBai({ title, category, description, btnText, img, href }) {
+  const isSmallScreen = useMediaQuery("(max-width:899px)");
   return (
     <React.Fragment>
       <CssBaseline />
@@ -17,13 +13,23 @@ function ItemLoatBai(props) {
         width={"100%"}
         direction={"row"}
         justifyContent={"center"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
-        <Stack width={"70%"} direction={"row"} m={2} p={2.5} spacing={2}>
-          <Stack spacing={2.5} width={"50%"} direction={"column"}>
+        <Stack
+          width={isSmallScreen ? "100%" : "80%"}
+          direction={isSmallScreen ? "column" : "row"}
+          flexWrap={isSmallScreen ? "wrap" : "nowrap"}
+          p={2.5}
+          spacing={2.5}
+        >
+          <Stack
+            spacing={2.5}
+            width={isSmallScreen ? "100%" : "50%"}
+            direction={"column"}
+          >
             <Typography
               align="left"
-              fontSize={24}
+              fontSize={isSmallScreen ? 18 : 20}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -33,7 +39,7 @@ function ItemLoatBai(props) {
             </Typography>
             <Typography
               align="left"
-              fontSize={32}
+              fontSize={isSmallScreen ? 30 : 32}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -51,29 +57,17 @@ function ItemLoatBai(props) {
               {description}
             </Typography>
             <Stack alignItems={"flex-start"}>
-              <Button
-                sx={{
-                  border: "2px solid #D2302C",
-                  color: "#D2302C",
-                  borderRadius: "10px",
-                  textTransform: "none",
-                  fontSize: "90%",
-                  fontWeight: "bold",
-                  fontFamily: "Open Sans",
-                }}
-              >
-                {btnText}
-              </Button>
+              <ButtonCustom btnText={btnText} />
             </Stack>
           </Stack>
 
           <Stack
-            width={"50%"}
+            width={isSmallScreen ? "100%" : "50%"}
             direction={"column"}
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Stack direction={"row"} p={2}>
+            <Stack direction={"row"} p={isSmallScreen ? 0 : 2}>
               <Link href={href}>
                 <img src={img} width="100%" height="auto" alt={category}></img>
               </Link>

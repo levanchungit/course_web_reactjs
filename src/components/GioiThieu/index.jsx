@@ -1,9 +1,13 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Stack, Typography } from "@mui/material";
-import { IMG_URL_GIOI_THIEU } from "../../constants/appConstants";
-import { FacebookOutlined, YouTube } from "@mui/icons-material/";
+import { Box, Link, Stack, Typography } from "@mui/material";
+import { FacebookOutlined, LinkedIn } from "@mui/icons-material/";
+import { useMediaQuery } from "@mui/material";
+import { URL_INFO } from "../../constants/appConstants";
 function GioiThieu(props) {
+  const isSmallScreen = useMediaQuery("(max-width:899px)");
+  const isVerySmallScreen = useMediaQuery("(max-width:399px)");
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -11,36 +15,32 @@ function GioiThieu(props) {
         width={"100%"}
         direction={"row"}
         justifyContent={"center"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px  #DDDDDD"}
+        sx={{
+          backgroundImage:
+            "url(https://res.cloudinary.com/ddfyyysdw/image/upload/v1700644583/hhwiuoyqlsevbi7redn4.png)",
+          backgroundImage:
+            "url(https://res.cloudinary.com/ddfyyysdw/image/upload/v1700648404/opuxngoxugrg3afcr2g9.png)",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
       >
         <Stack
-          width={"70%"}
+          width={isSmallScreen ? "100%" : "80%"}
           direction={"row"}
-          px={2}
+          p={2.5}
           spacing={2}
-          alignItems={"center"}
+          alignItems={"left"}
         >
           <Stack
-            width={"50%"}
+            spacing={2}
+            width={isVerySmallScreen ? "100%" : "60%"}
             direction={"column"}
-            alignItems={"center"}
-            justifyContent={"center"}
           >
-            <Stack direction={"row"}>
-              <img
-                src={IMG_URL_GIOI_THIEU}
-                width="100%"
-                max-width="100%"
-                height="auto"
-                alt={"Gioi Thieu"}
-              ></img>
-            </Stack>
-          </Stack>
-
-          <Stack spacing={2} width={"50%"} direction={"column"}>
             <Typography
-              align="center"
-              fontSize={24}
+              align="left"
+              fontSize={isSmallScreen ? 30 : 32}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -50,21 +50,87 @@ function GioiThieu(props) {
             </Typography>
 
             <Typography
-              align="center"
+              align="justify"
               fontSize={18}
               fontFamily={"Open Sans"}
               fontWeight={"Regular"}
               color={"#FFFF"}
             >
-              Xin chào Chung đây !<br></br>Đây là website mình đang nổ lực tạo
-              ra một nguồn kiến thức về lập trình, kỹ năng, sách và podcast và
-              nhiều thứ khác! Hãy cùng trải nghiệm khám phá và đắm chìm trong
-              một biển năng lượng, sự trẻ trung và nhiệt huyết, để chúng ta cùng
-              phát triển và học hỏi mỗi ngày nhé.
+              Trang web là nơi tập trung đa dạng nhiều nội dung. Mục tiêu áp
+              dụng và chia sẻ kiến thức, hy vọng nội dung mình mang lại nguồn
+              động viên và niềm vui tích cực cho mọi người trên hành trình phát
+              triển bản thân. Hãy cùng nhau lan toả năng lượng tích cực và khám
+              phá thế giới đa sắc mà trang web mang lại!
             </Typography>
-            <Stack direction={"row"} spacing={2} justifyContent={"center"}>
-              <FacebookOutlined sx={{ color: "#D2302C" }} />
-              <YouTube sx={{ color: "#D2302C" }} />
+
+            <Stack
+              direction={"row"}
+              spacing={2.5}
+              justifyContent={"flex-start"}
+            >
+              <Link href={URL_INFO.facebook} underline="none">
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  width={"52px"}
+                  height={"52px"}
+                  borderRadius={"50%"}
+                  p={"10px"}
+                  border={"2px solid #D2302C"}
+                >
+                  <FacebookOutlined
+                    sx={{
+                      width: "2rem",
+                      height: "2rem",
+                      color: "#D2302C",
+                    }}
+                  />
+                </Box>
+              </Link>
+
+              <Link href={URL_INFO.linkedin} underline="none">
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  width={"52px"}
+                  height={"52px"}
+                  borderRadius={"50%"}
+                  p={"10px"}
+                  border={"2px solid #D2302C"}
+                >
+                  <LinkedIn
+                    sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                  />
+                </Box>
+              </Link>
+
+              <Link href={URL_INFO.port_folio} underline="none">
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  width={"52px"}
+                  height={"52px"}
+                  borderRadius={"50%"}
+                  p={"10px"}
+                  border={"2px solid #D2302C"}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "10px",
+                      width: "2rem",
+                      height: "2rem",
+                      color: "#D2302C",
+                    }}
+                  >
+                    Port
+                    <br />
+                    Folio
+                  </Typography>
+                </Box>
+              </Link>
             </Stack>
           </Stack>
         </Stack>

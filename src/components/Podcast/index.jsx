@@ -1,13 +1,10 @@
 import * as React from "react";
 import Header from "../Header";
-import { Button, Grid, Stack, Typography, Link } from "@mui/material";
-import {
-  IMG_URL_LB_HVBT,
-  LIST_LOAT_BAI,
-  LIST_PODCASTS,
-} from "../../constants/appConstants";
+import { Grid, Stack, Typography, Link } from "@mui/material";
+import { LIST_LOAT_BAI, LIST_PODCASTS } from "../../constants/appConstants";
 import ItemLoatBai from "../ItemLoatBai";
 import { useMediaQuery } from "@mui/material";
+import ButtonCustom from "../ButtonCustom";
 
 function Podcast() {
   const isSmallScreen = useMediaQuery("(max-width:899px)");
@@ -20,7 +17,7 @@ function Podcast() {
         container
         direction={"column"}
         width={"100%"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         <Grid
           container
@@ -69,19 +66,7 @@ function Podcast() {
           </Grid>
 
           <Stack alignItems={"center"} md={4}>
-            <Button
-              sx={{
-                border: "2px solid #D2302C",
-                color: "#D2302C",
-                borderRadius: "10px",
-                textTransform: "none",
-                fontSize: "90%",
-                fontWeight: "bold",
-                fontFamily: "Open Sans",
-              }}
-            >
-              Xem các tập khác
-            </Button>
+            <ButtonCustom btnText={"Xem các tập khác"} />
           </Stack>
         </Grid>
       </Grid>
@@ -91,7 +76,7 @@ function Podcast() {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
         spacing={2.5}
         p={2.5}
       >
@@ -106,10 +91,14 @@ function Podcast() {
             CÁC TẬP GẦN ĐÂY
           </Typography>
         </Stack>
-        <Grid direction={"row"} container width={"70%"}>
+        <Grid
+          container
+          direction={"row"}
+          width={isSmallScreen ? "100%" : "80%"}
+        >
           {LIST_PODCASTS.map((item) => {
             return (
-              <Grid item xs={12} md={6} xl={4}>
+              <Grid item xs={12} md={4} padding={2.5}>
                 <Link href={item.href}>
                   <img
                     src={
@@ -128,36 +117,31 @@ function Podcast() {
         </Grid>
       </Stack>
       <Stack alignItems={"center"} mb={2.5}>
-        <Button
-          sx={{
-            border: "2px solid #D2302C",
-            color: "#D2302C",
-            borderRadius: "10px",
-            textTransform: "none",
-            fontSize: "90%",
-            fontWeight: "bold",
-            fontFamily: "Open Sans",
-          }}
-        >
-          Xem các tập khác
-        </Button>
+        <ButtonCustom btnText={"Xem các tập khác"} />
       </Stack>
 
-      {LIST_LOAT_BAI.map((item, index) => {
-        return (
-          item.visible && (
-            <ItemLoatBai
-              key={item.id}
-              title={item.title}
-              category={item.category}
-              description={item.description}
-              btnText={item.btnText}
-              href={item.href}
-              img={item.img}
-            />
-          )
-        );
-      })}
+      <Grid
+        container
+        direction={"column"}
+        width={"100%"}
+        borderTop={"0.1px solid #DDDDDD"}
+      >
+        {LIST_LOAT_BAI.map((item, index) => {
+          return (
+            item.visible && (
+              <ItemLoatBai
+                key={item.id}
+                title={item.title}
+                category={item.category}
+                description={item.description}
+                btnText={item.btnText}
+                href={item.href}
+                img={item.img}
+              />
+            )
+          );
+        })}
+      </Grid>
     </div>
   );
 }

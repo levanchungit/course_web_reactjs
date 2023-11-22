@@ -1,6 +1,7 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
+import ButtonCustom from "../ButtonCustom";
 
 function Welcome(props) {
   return (
@@ -11,7 +12,7 @@ function Welcome(props) {
         columns={16}
         width={"100%"}
         justifyContent={"center"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         <Grid m={2} px={2}>
           <Stack width={"100%"} direction={"column"} spacing={2}>
@@ -58,19 +59,7 @@ function Welcome(props) {
             </Stack>
 
             <Stack alignItems={"center"}>
-              <Button
-                sx={{
-                  border: "2px solid #D2302C",
-                  color: "#D2302C",
-                  borderRadius: "10px",
-                  textTransform: "none",
-                  fontSize: "90%",
-                  fontWeight: "bold",
-                  fontFamily: "Open Sans",
-                }}
-              >
-                Xem toàn bộ loạt bài
-              </Button>
+              <ButtonCustom btnText={"Xem toàn bộ loạt bài"} />
             </Stack>
           </Stack>
         </Grid>
