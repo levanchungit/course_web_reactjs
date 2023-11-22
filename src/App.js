@@ -10,12 +10,12 @@ import DialogHoiDap from "./components/DialogHoiDap";
 function App() {
   return (
     <div className="App">
-      {/* <Header />
+      <Header />
       <Welcome />
       <LoatBai />
-      <GioiThieu /> */}
+      <GioiThieu />
 
-      <Podcast />
+      {/* <Podcast /> */}
       <DialogHoiDap />
     </div>
   );

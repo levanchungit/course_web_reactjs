@@ -12,7 +12,7 @@ function Welcome(props) {
         columns={16}
         width={"100%"}
         justifyContent={"center"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         <Grid m={2} px={2}>
           <Stack width={"100%"} direction={"column"} spacing={2}>

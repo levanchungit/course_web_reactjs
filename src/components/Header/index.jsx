@@ -33,20 +33,28 @@ function Header(props) {
       <CssBaseline />
       <AppBar
         position="sticky"
-        sx={{ top: 0, bottom: "auto", backgroundColor: "#131313" }}
+        sx={{
+          top: 0,
+          bottom: "auto",
+          backgroundColor: "#131313",
+        }}
       >
         <Toolbar
           sx={{
             alignItems: "center",
             justifyContent: "center",
-            padding: "1rem",
+          }}
+          style={{
+            paddingLeft: isSmallScreen ? "20px" : "0px",
+            paddingRight: isSmallScreen ? "20px" : "0px",
           }}
         >
           <Stack
             width={isSmallScreen ? "100%" : "80%"}
             direction={isSmallScreen ? "column" : "row"}
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
+            px={isSmallScreen ? 0 : 2.5}
           >
             <Stack
               direction="row"
@@ -59,7 +67,7 @@ function Header(props) {
               <Link href="#" underline="none">
                 <img
                   src={LOGO_URL}
-                  width={"250px"}
+                  width={"150px"}
                   height="auto"
                   alt="LOGO WEB COURSE"
                   style={{

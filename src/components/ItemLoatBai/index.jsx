@@ -13,7 +13,7 @@ function ItemLoatBai({ title, category, description, btnText, img, href }) {
         width={"100%"}
         direction={"row"}
         justifyContent={"center"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         <Stack
           width={isSmallScreen ? "100%" : "80%"}

@@ -17,7 +17,7 @@ function Podcast() {
         container
         direction={"column"}
         width={"100%"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         <Grid
           container
@@ -76,7 +76,7 @@ function Podcast() {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
         spacing={2.5}
         p={2.5}
       >
@@ -124,7 +124,7 @@ function Podcast() {
         container
         direction={"column"}
         width={"100%"}
-        borderTop={"0.5px solid #D9D9D9"}
+        borderTop={"0.1px solid #DDDDDD"}
       >
         {LIST_LOAT_BAI.map((item, index) => {
           return (
