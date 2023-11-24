@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -127,7 +126,7 @@ const withDialog = (WrappedComponent) => {
   };
 };
 
-const DialogHoiDap = ({ openDialog }) => {
+const FabHoiDap = ({ openDialog }) => {
   return (
     <Fab
       sx={{
@@ -147,4 +146,4 @@ const DialogHoiDap = ({ openDialog }) => {
   );
 };
 
-export default withDialog(DialogHoiDap);
+export default withDialog(FabHoiDap);

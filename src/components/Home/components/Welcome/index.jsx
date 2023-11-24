@@ -1,24 +1,27 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Grid, Stack, Typography } from "@mui/material";
-import ButtonCustom from "../ButtonCustom";
+import ButtonCustom from "../../../ButtonCustom";
+import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
 
 function Welcome(props) {
+  const { isSmallScreen } = useMediaQueryValues();
+
   return (
     <React.Fragment>
       <CssBaseline />
       <Grid
         container
-        columns={16}
+        columns={12}
         width={"100%"}
         justifyContent={"center"}
         borderTop={"0.1px solid #DDDDDD"}
       >
-        <Grid m={2} px={2}>
-          <Stack width={"100%"} direction={"column"} spacing={2}>
+        <Grid item sx={12} sm={9.6} md={5}>
+          <Stack width={"100%"} direction={"column"} spacing={2} p={2.5}>
             <Typography
               align="center"
-              fontSize={32}
+              fontSize={isSmallScreen ? 30 : 32}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -26,6 +29,7 @@ function Welcome(props) {
             >
               CHÀO MỪNG CÁC BẠN ĐẾN VỚI WEBSITE
             </Typography>
+
             <Typography
               align="center"
               fontSize={18}
@@ -36,9 +40,10 @@ function Welcome(props) {
             >
               999 lượt truy cập và tìm kiếm thông tin tại đây
             </Typography>
+
             <Typography
               align="center"
-              fontSize={24}
+              fontSize={isSmallScreen ? 20 : 24}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -46,16 +51,30 @@ function Welcome(props) {
               VIDEO MỚI NHẤT
             </Typography>
 
-            <Stack direction={"row"} spacing={2} justifyContent={"center"}>
-              <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
+            <Stack width={"100%"}>
+              <div
+                style={{
+                  position: "relative",
+                  paddingBottom: "56.25%",
+                  height: 0,
+                }}
+              >
+                <iframe
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "20px",
+                  }}
+                  src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
             </Stack>
 
             <Stack alignItems={"center"}>

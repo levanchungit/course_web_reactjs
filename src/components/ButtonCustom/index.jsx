@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const ButtonCustom = ({ btnText, onClick, ...restProps }) => {
+export default function ButtonCustom({ btnText, onClick, ...restProps }) {
   return (
     <Button
       sx={{
@@ -19,6 +19,4 @@ const ButtonCustom = ({ btnText, onClick, ...restProps }) => {
       {btnText}
     </Button>
   );
-};
-
-export default ButtonCustom;
+}

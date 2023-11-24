@@ -1,17 +1,16 @@
 import * as React from "react";
-import Header from "../Header";
-import { Grid, Stack, Typography, Link } from "@mui/material";
-import { LIST_LOAT_BAI, LIST_PODCASTS } from "../../constants/appConstants";
-import ItemLoatBai from "../ItemLoatBai";
-import { useMediaQuery } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
+import { LIST_LOAT_BAI } from "../../constants/appConstants";
+import LoatBaiItem from "./components/LoatBaiItem";
 import ButtonCustom from "../ButtonCustom";
+import { useMediaQueryValues } from "../../contexts/MediaQueryContext";
+import LoatBaiList from "./components/TapGanDayList";
 
-function Podcast() {
-  const isSmallScreen = useMediaQuery("(max-width:899px)");
+export default function Podcast() {
+  const { isMediumScreen } = useMediaQueryValues();
+
   return (
     <div className="App">
-      <Header />
-
       {/* VIDEO MỚI NHẤT */}
       <Grid
         container
@@ -39,7 +38,7 @@ function Podcast() {
             </Typography>
           </Grid>
 
-          <Grid item width={isSmallScreen ? "100%" : "50%"}>
+          <Grid item width={isMediumScreen ? "100%" : "50%"}>
             <div
               style={{
                 position: "relative",
@@ -64,10 +63,6 @@ function Podcast() {
               />
             </div>
           </Grid>
-
-          <Stack alignItems={"center"} md={4}>
-            <ButtonCustom btnText={"Xem các tập khác"} />
-          </Stack>
         </Grid>
       </Grid>
 
@@ -90,31 +85,9 @@ function Podcast() {
           >
             CÁC TẬP GẦN ĐÂY
           </Typography>
+
+          <LoatBaiList />
         </Stack>
-        <Grid
-          container
-          direction={"row"}
-          width={isSmallScreen ? "100%" : "80%"}
-        >
-          {LIST_PODCASTS.map((item) => {
-            return (
-              <Grid item xs={12} md={4} padding={2.5}>
-                <Link href={item.href}>
-                  <img
-                    src={
-                      "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2147947977/settings_images/11f538e-136-b242-4786-66f2d855a56b_139.jpeg"
-                    }
-                    width="100%"
-                    max-width="100%"
-                    height="auto"
-                    alt={item.title}
-                    sx={{ borderRadius: "20px" }}
-                  ></img>
-                </Link>
-              </Grid>
-            );
-          })}
-        </Grid>
       </Stack>
       <Stack alignItems={"center"} mb={2.5}>
         <ButtonCustom btnText={"Xem các tập khác"} />
@@ -129,7 +102,7 @@ function Podcast() {
         {LIST_LOAT_BAI.map((item, index) => {
           return (
             item.visible && (
-              <ItemLoatBai
+              <LoatBaiItem
                 key={item.id}
                 title={item.title}
                 category={item.category}
@@ -145,5 +118,3 @@ function Podcast() {
     </div>
   );
 }
-
-export default Podcast;

@@ -1,14 +1,14 @@
 import * as React from "react";
-import { LIST_LOAT_BAI } from "../../constants/appConstants";
-import ItemLoatBai from "../ItemLoatBai";
+import { LIST_LOAT_BAI } from "../../../../constants/appConstants";
+import LoatBaiItem from "../LoatBaiItem";
 
-function LoatBai(props) {
+export default function LoatBaiList(props) {
   return (
     <React.Fragment>
       {LIST_LOAT_BAI.map((item, index) => {
         return (
           item.visible && (
-            <ItemLoatBai
+            <LoatBaiItem
               key={item.id}
               title={item.title}
               category={item.category}
@@ -23,5 +23,3 @@ function LoatBai(props) {
     </React.Fragment>
   );
 }
-
-export default LoatBai;

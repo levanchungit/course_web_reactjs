@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { Stack, IconButton } from "@mui/material";
 import { MENU_ITEMS, LOGO_URL } from "../../constants/appConstants";
-import { useMediaQuery } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -12,9 +11,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { useMediaQueryValues } from "../../contexts/MediaQueryContext";
 
 function Header(props) {
-  const isSmallScreen = useMediaQuery("(max-width:899px)");
+  const { isMediumScreen } = useMediaQueryValues();
+
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -45,23 +46,23 @@ function Header(props) {
             justifyContent: "center",
           }}
           style={{
-            paddingLeft: isSmallScreen ? "20px" : "0px",
-            paddingRight: isSmallScreen ? "20px" : "0px",
+            paddingLeft: isMediumScreen ? "20px" : "0px",
+            paddingRight: isMediumScreen ? "20px" : "0px",
           }}
         >
           <Stack
-            width={isSmallScreen ? "100%" : "80%"}
-            direction={isSmallScreen ? "column" : "row"}
+            width={isMediumScreen ? "100%" : "80%"}
+            direction={isMediumScreen ? "column" : "row"}
             alignItems="center"
             justifyContent="space-between"
-            px={isSmallScreen ? 0 : 2.5}
+            px={isMediumScreen ? 0 : 2.5}
           >
             <Stack
               direction="row"
               alignItems="center"
               sx={{
-                width: isSmallScreen ? "100%" : "auto",
-                justifyContent: isSmallScreen ? "space-between" : "flex-start",
+                width: isMediumScreen ? "100%" : "auto",
+                justifyContent: isMediumScreen ? "space-between" : "flex-start",
               }}
             >
               <Link href="#" underline="none">
@@ -75,7 +76,7 @@ function Header(props) {
                   }}
                 />
               </Link>
-              {isSmallScreen && (
+              {isMediumScreen && (
                 <IconButton
                   size="large"
                   color="primary"
@@ -87,28 +88,31 @@ function Header(props) {
               )}
             </Stack>
             <Stack
-              direction={isSmallScreen ? "column" : "row"}
-              justifyContent={"center"}
+              direction={isMediumScreen ? "column" : "row"}
+              justifyContent={"flex-end"}
               alignItems="center"
-              gap={isSmallScreen ? 2 : 0}
+              gap={isMediumScreen ? 2 : 0}
               sx={{
-                width: isSmallScreen ? "100%" : "80%",
+                width: isMediumScreen ? "100%" : "80%",
               }}
             >
-              {isSmallScreen ? null : (
+              {isMediumScreen ? null : (
                 <Stack direction="row" spacing={4} alignItems="center">
-                  {MENU_ITEMS.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.url}
-                      color="white"
-                      underline="none"
-                      textTransform="uppercase"
-                      fontFamily="Open Sans"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  {MENU_ITEMS.map(
+                    (item) =>
+                      item.visible && (
+                        <Link
+                          key={item.name}
+                          href={item.url}
+                          color="white"
+                          underline="none"
+                          textTransform="uppercase"
+                          fontFamily="Open Sans"
+                        >
+                          {item.name}
+                        </Link>
+                      )
+                  )}
                 </Stack>
               )}
             </Stack>
@@ -128,19 +132,22 @@ function Header(props) {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {MENU_ITEMS.map((item) => (
-              <ListItem button key={item.name}>
-                <Link
-                  href={item.url}
-                  color="black"
-                  underline="none"
-                  textTransform="uppercase"
-                  fontFamily="Open Sans"
-                >
-                  <ListItemText primary={item.name} />
-                </Link>
-              </ListItem>
-            ))}
+            {MENU_ITEMS.map(
+              (item) =>
+                item.visible && (
+                  <ListItem button key={item.name}>
+                    <Link
+                      href={item.url}
+                      color="black"
+                      underline="none"
+                      textTransform="uppercase"
+                      fontFamily="Open Sans"
+                    >
+                      <ListItemText primary={item.name} />
+                    </Link>
+                  </ListItem>
+                )
+            )}
           </List>
         </Box>
       </Drawer>
