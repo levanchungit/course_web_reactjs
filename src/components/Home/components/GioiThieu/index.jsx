@@ -2,11 +2,11 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Link, Stack, Typography } from "@mui/material";
 import { FacebookOutlined, LinkedIn } from "@mui/icons-material/";
-import { useMediaQuery } from "@mui/material";
-import { URL_INFO } from "../../constants/appConstants";
-function GioiThieu(props) {
-  const isSmallScreen = useMediaQuery("(max-width:899px)");
-  const isVerySmallScreen = useMediaQuery("(max-width:499px)");
+import { URL_INFO } from "../../../../constants/appConstants";
+import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
+
+export default function GioiThieu(props) {
+  const { isSmallScreen, isMediumScreen } = useMediaQueryValues();
 
   return (
     <React.Fragment>
@@ -15,10 +15,8 @@ function GioiThieu(props) {
         width={"100%"}
         direction={"row"}
         justifyContent={"center"}
-        borderTop={"0.1px  #DDDDDD"}
+        borderTop={"0.1px solid  #DDDDDD"}
         sx={{
-          backgroundImage:
-            "url(https://res.cloudinary.com/ddfyyysdw/image/upload/v1700644583/hhwiuoyqlsevbi7redn4.png)",
           backgroundImage:
             "url(https://res.cloudinary.com/ddfyyysdw/image/upload/v1700648404/opuxngoxugrg3afcr2g9.png)",
           backgroundPosition: "center",
@@ -27,7 +25,7 @@ function GioiThieu(props) {
         }}
       >
         <Stack
-          width={isSmallScreen ? "100%" : "80%"}
+          width={isMediumScreen ? "100%" : "80%"}
           direction={"row"}
           p={2.5}
           spacing={2}
@@ -35,12 +33,12 @@ function GioiThieu(props) {
         >
           <Stack
             spacing={2}
-            width={isVerySmallScreen ? "100%" : "50%"}
+            width={isSmallScreen ? "100%" : "50%"}
             direction={"column"}
           >
             <Typography
               align="left"
-              fontSize={isSmallScreen ? 30 : 32}
+              fontSize={isMediumScreen ? 30 : 32}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -138,5 +136,3 @@ function GioiThieu(props) {
     </React.Fragment>
   );
 }
-
-export default GioiThieu;

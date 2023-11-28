@@ -1,11 +1,19 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography, Link } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
-import ButtonCustom from "../ButtonCustom";
+import ButtonCustom from "../../../ButtonCustom";
+import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
 
-function ItemLoatBai({ title, category, description, btnText, img, href }) {
-  const isSmallScreen = useMediaQuery("(max-width:899px)");
+export default function LoatBaiItem({
+  title,
+  category,
+  description,
+  btnText,
+  img,
+  href,
+}) {
+  const { isMediumScreen } = useMediaQueryValues();
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -16,20 +24,20 @@ function ItemLoatBai({ title, category, description, btnText, img, href }) {
         borderTop={"0.1px solid #DDDDDD"}
       >
         <Stack
-          width={isSmallScreen ? "100%" : "80%"}
-          direction={isSmallScreen ? "column" : "row"}
-          flexWrap={isSmallScreen ? "wrap" : "nowrap"}
+          width={isMediumScreen ? "100%" : "80%"}
+          direction={isMediumScreen ? "column" : "row"}
+          flexWrap={isMediumScreen ? "wrap" : "nowrap"}
           p={2.5}
           spacing={2.5}
         >
           <Stack
             spacing={2.5}
-            width={isSmallScreen ? "100%" : "50%"}
+            width={isMediumScreen ? "100%" : "50%"}
             direction={"column"}
           >
             <Typography
               align="left"
-              fontSize={isSmallScreen ? 18 : 20}
+              fontSize={isMediumScreen ? 18 : 20}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -39,7 +47,7 @@ function ItemLoatBai({ title, category, description, btnText, img, href }) {
             </Typography>
             <Typography
               align="left"
-              fontSize={isSmallScreen ? 30 : 32}
+              fontSize={isMediumScreen ? 30 : 32}
               fontFamily={"Open Sans"}
               fontWeight={"Bold"}
               color={"#D2302C"}
@@ -62,12 +70,12 @@ function ItemLoatBai({ title, category, description, btnText, img, href }) {
           </Stack>
 
           <Stack
-            width={isSmallScreen ? "100%" : "50%"}
+            width={isMediumScreen ? "100%" : "50%"}
             direction={"column"}
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Stack direction={"row"} p={isSmallScreen ? 0 : 2}>
+            <Stack direction={"row"} p={isMediumScreen ? 0 : 2}>
               <Link href={href}>
                 <img src={img} width="100%" height="auto" alt={category}></img>
               </Link>
@@ -78,5 +86,3 @@ function ItemLoatBai({ title, category, description, btnText, img, href }) {
     </React.Fragment>
   );
 }
-
-export default ItemLoatBai;

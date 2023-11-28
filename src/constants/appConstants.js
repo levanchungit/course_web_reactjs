@@ -19,32 +19,39 @@ export const MENU_ITEMS = [
   {
     name: "Trang chủ",
     url: "/",
+    visible: true,
   },
   {
     name: "LẬP TRÌNH",
     url: "/#",
+    visible: false,
   },
   {
     name: "Podcast",
     url: "/podcast",
+    visible: true,
   },
   {
     name: "Chạy bộ",
     url: "/#",
+    visible: false,
   },
   {
     name: "Nấu ăn",
     url: "/#",
+    visible: false,
   },
 
   {
     name: "Guitar",
     url: "/#",
+    visible: false,
   },
 
   {
     name: "Blog",
     url: "/#",
+    visible: true,
   },
 ];
 
