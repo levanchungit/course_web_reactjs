@@ -1,11 +1,13 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Grid, Stack, Typography } from "@mui/material";
 import ButtonCustom from "../../../ButtonCustom";
-import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
+import { useMainValues } from "../../../../contexts/MainContext";
 
 function Welcome(props) {
-  const { isSmallScreen } = useMediaQueryValues();
+  const navigate = useNavigate();
+  const { isSmallScreen, youtubeData } = useMainValues();
 
   return (
     <React.Fragment>
@@ -68,7 +70,7 @@ function Welcome(props) {
                     height: "100%",
                     borderRadius: "20px",
                   }}
-                  src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
+                  src={`https://www.youtube.com/embed/${youtubeData}`}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -78,7 +80,10 @@ function Welcome(props) {
             </Stack>
 
             <Stack alignItems={"center"}>
-              <ButtonCustom btnText={"Xem toàn bộ loạt bài"} />
+              <ButtonCustom
+                onClick={() => navigate("/podcast")}
+                btnText={"Xem toàn bộ loạt bài"}
+              />
             </Stack>
           </Stack>
         </Grid>

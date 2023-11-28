@@ -3,11 +3,28 @@ import { Grid, Stack, Typography } from "@mui/material";
 import { LIST_LOAT_BAI } from "../../constants/appConstants";
 import LoatBaiItem from "./components/LoatBaiItem";
 import ButtonCustom from "../ButtonCustom";
-import { useMediaQueryValues } from "../../contexts/MediaQueryContext";
+import { useMainValues } from "../../contexts/MainContext";
 import LoatBaiList from "./components/TapGanDayList";
+import getYoutubeVideos from "../../utils/youtubeApi";
 
 export default function Podcast() {
-  const { isMediumScreen } = useMediaQueryValues();
+  const [videoId, setVideoId] = React.useState(null);
+  const { isMediumScreen } = useMainValues();
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getYoutubeVideos(10);
+        if (data.length > 0) {
+          setVideoId(data[0].id.videoId);
+        }
+      } catch (error) {
+        console.error("Error fetching data Welcome", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
@@ -55,7 +72,7 @@ export default function Podcast() {
                   height: "100%",
                   borderRadius: "20px",
                 }}
-                src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
+                src={`https://www.youtube.com/embed/${videoId}`}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -90,7 +107,10 @@ export default function Podcast() {
         </Stack>
       </Stack>
       <Stack alignItems={"center"} mb={2.5}>
-        <ButtonCustom btnText={"Xem các tập khác"} />
+        <ButtonCustom
+          onClick={() => window.open("https://www.youtube.com/@ChungLV/videos")}
+          btnText={"Xem các tập khác"}
+        />
       </Stack>
 
       <Grid
