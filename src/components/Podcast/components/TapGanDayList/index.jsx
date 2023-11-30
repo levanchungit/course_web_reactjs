@@ -8,7 +8,12 @@ export default function LoatBaiList(props) {
 
   return (
     <React.Fragment>
-      <Grid container spacing={2} width={isMediumScreen ? "99%" : "80%"}>
+      <Grid
+        container
+        justifyContent={"center"}
+        spacing={2}
+        width={isMediumScreen ? "99%" : "80%"}
+      >
         {youtubeData.map((item) => {
           const href = "https://www.youtube.com/watch?v=" + item.id.videoId;
           return (

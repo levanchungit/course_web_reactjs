@@ -11,13 +11,24 @@ export const MainProvider = ({ children }) => {
   const isLargeScreen = useMediaQuery("(max-width:1535px)"); // lg, large: 1200px
   const isExtraLargeScreen = useMediaQuery("(min-width:1536px)"); // xl, extra-large: 1536px
 
-  const [youtubeData, setYoutubeData] = useState([]);
+  const [youtubeData, setYoutubeData] = useState(() => {
+    const cachedData = localStorage.getItem("cachedData");
+    return cachedData ? JSON.parse(cachedData) : [];
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getYoutubeVideos(10); // Replace with your search query
-        setYoutubeData(data);
+        const cachedData = localStorage.getItem("cachedData");
+        if (cachedData) {
+          console.log("cachedData true");
+          setYoutubeData(JSON.parse(cachedData));
+        } else {
+          console.log("cachedData false");
+          const data = await getYoutubeVideos(10);
+          setYoutubeData(data);
+          localStorage.setItem("cachedData", JSON.stringify(data));
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }

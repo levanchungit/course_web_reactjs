@@ -8,7 +8,6 @@ import { useMainValues } from "../../../../contexts/MainContext";
 function Welcome(props) {
   const navigate = useNavigate();
   const { isSmallScreen, youtubeData } = useMainValues();
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -19,7 +18,7 @@ function Welcome(props) {
         justifyContent={"center"}
         borderTop={"0.1px solid #DDDDDD"}
       >
-        <Grid item sx={12} sm={9.6} md={5}>
+        <Grid item>
           <Stack width={"100%"} direction={"column"} spacing={2} p={2.5}>
             <Typography
               align="center"
@@ -61,21 +60,23 @@ function Welcome(props) {
                   height: 0,
                 }}
               >
-                <iframe
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "20px",
-                  }}
-                  src={`https://www.youtube.com/embed/${youtubeData}`}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                {youtubeData.length > 0 && (
+                  <iframe
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "20px",
+                    }}
+                    src={`https://www.youtube.com/embed/${youtubeData[0].id.videoId}`}
+                    title={youtubeData[0].snippet.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                )}
               </div>
             </Stack>
 
