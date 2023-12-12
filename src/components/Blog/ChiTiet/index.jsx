@@ -16,7 +16,7 @@ function ChiTietBaiViet() {
       image: "https://cdnmedia.baotintuc.vn/Upload/4l8oGGp94lA5r6lHXppg/files/2022/03/f0conennammaylanh.jpg",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae laoreet justo. Donec euismod, nisl eget ultricies aliquam, velit odio lacinia diam, in malesuada odio odio in velit. Sed non ornare nisl",
     });
-    setDataBaiVietNoiBac([
+    setDataBaiVietNoiBac([  
       {
         _id: 1,
         title: "Bài viết nổi bật 1",
