@@ -3,10 +3,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Link, Stack, Typography } from "@mui/material";
 import { FacebookOutlined, LinkedIn } from "@mui/icons-material/";
 import { URL_INFO } from "../../../../constants/appConstants";
-import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
+import { useMainValues } from "../../../../contexts/MainContext";
 
 export default function GioiThieu(props) {
-  const { isSmallScreen, isMediumScreen } = useMediaQueryValues();
+  const { isSmallScreen, isMediumScreen } = useMainValues();
 
   return (
     <React.Fragment>

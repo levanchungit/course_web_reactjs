@@ -16,6 +16,7 @@ export default function TapGanDayItem({ title, src, href }) {
             }
             width="100%"
             max-width="100%"
+            min-width="400px"
             height="auto"
             alt={title}
             style={{ borderRadius: "10px" }}

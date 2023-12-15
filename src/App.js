@@ -7,12 +7,12 @@ import Blog from "./components/Blog";
 import FabHoiDap from "./components/FabHoiDap";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { MediaQueryProvider } from "./contexts/MediaQueryContext";
+import { MainProvider } from "./contexts/MainContext";
 
 function App() {
   return (
     <div className="App">
-      <MediaQueryProvider>
+      <MainProvider>
         <BrowserRouter>
           <Header />
           <Routes>
@@ -22,7 +22,7 @@ function App() {
           </Routes>
           <FabHoiDap />
         </BrowserRouter>
-      </MediaQueryProvider>
+      </MainProvider>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography, Link } from "@mui/material";
 import ButtonCustom from "../../../ButtonCustom";
-import { useMediaQueryValues } from "../../../../contexts/MediaQueryContext";
+import { useMainValues } from "../../../../contexts/MainContext";
 
 export default function LoatBaiItem({
   title,
@@ -12,7 +12,7 @@ export default function LoatBaiItem({
   img,
   href,
 }) {
-  const { isMediumScreen } = useMediaQueryValues();
+  const { isMediumScreen } = useMainValues();
 
   return (
     <React.Fragment>

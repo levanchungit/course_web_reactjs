@@ -3,12 +3,12 @@ import { Grid, Stack, Typography } from "@mui/material";
 import { LIST_LOAT_BAI } from "../../constants/appConstants";
 import LoatBaiItem from "./components/LoatBaiItem";
 import ButtonCustom from "../ButtonCustom";
-import { useMediaQueryValues } from "../../contexts/MediaQueryContext";
+import { useMainValues } from "../../contexts/MainContext";
 import LoatBaiList from "./components/TapGanDayList";
+// import getYoutubeVideos from "../../utils/youtubeApi";
 
 export default function Podcast() {
-  const { isMediumScreen } = useMediaQueryValues();
-
+  const { isMediumScreen, youtubeData } = useMainValues();
   return (
     <div className="App">
       {/* VIDEO MỚI NHẤT */}
@@ -46,21 +46,23 @@ export default function Podcast() {
                 height: 0,
               }}
             >
-              <iframe
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "20px",
-                }}
-                src="https://www.youtube.com/embed/kncTDoCPxxQ?si=Ab7LjWoVchFlJIbt"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              {youtubeData && youtubeData.length > 0 && (
+                <iframe
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "20px",
+                  }}
+                  src={`https://www.youtube.com/embed/${youtubeData[0].id.videoId}}`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              )}
             </div>
           </Grid>
         </Grid>
@@ -90,7 +92,10 @@ export default function Podcast() {
         </Stack>
       </Stack>
       <Stack alignItems={"center"} mb={2.5}>
-        <ButtonCustom btnText={"Xem các tập khác"} />
+        <ButtonCustom
+          onClick={() => window.open("https://www.youtube.com/@ChungLV/videos")}
+          btnText={"Xem các tập khác"}
+        />
       </Stack>
 
       <Grid

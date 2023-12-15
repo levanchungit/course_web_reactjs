@@ -11,10 +11,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { useMediaQueryValues } from "../../contexts/MediaQueryContext";
+import { useMainValues } from "../../contexts/MainContext";
 
 function Header(props) {
-  const { isMediumScreen } = useMediaQueryValues();
+  const { isMediumScreen } = useMainValues();
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
