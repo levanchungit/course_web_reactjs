@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Typography } from "@mui/material";
+import ChiTietBaiViet from "./ChiTiet";
 
 function Blog() {
   return (
     <div className="App">
-      <Typography>Blog</Typography>
+      <ChiTietBaiViet />
     </div>
   );
 }
