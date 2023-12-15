@@ -17,8 +17,6 @@ psd
 thumb
 sketch
 .env
-
-.env
 .env.production
 .env.staging
 
