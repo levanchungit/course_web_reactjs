@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Stack, Typography } from "@mui/material";
 
 function ItemBaiViet(props) {
-  console.log("props.dataItem", props.dataItem);
   const [dataItem, setDataItem] = React.useState(props.dataItem);
   const MAX_LENGTH_CONTENT = 443;
   return (

@@ -1,20 +1,31 @@
 import * as React from "react";
 import { Button, Stack } from "@mui/material";
-import Comment from "../Components/Comment";
-import Content from "../Components/Content";
 import { useMainValues } from "../../../contexts/MainContext";
 import TimKiem from "../Components/TimKiem";
 import GioiThieu from "../Components/GioiThieu";
 import BaiVietNoiBat from "../Components/BaiVietNoiBat";
 import ItemBaiViet from "../Components/ItemBaiViet";
 import moment from "moment";
+import authAPI from "../../../api/BaiVietAPI";
 
 function BaiViet() {
   const { isMediumScreen } = useMainValues();
   const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({});
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
-
+  const [dataBaiViet, setDataBaiViet] = React.useState([]);
   React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await authAPI.getPosts(1, 10, "created_at");
+        console.log("response: ", response);
+        if (response.status === 200) {
+          setDataBaiViet(response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
     setDaGtaGioiThieu({
       image:
         "https://cdnmedia.baotintuc.vn/Upload/4l8oGGp94lA5r6lHXppg/files/2022/03/f0conennammaylanh.jpg",
@@ -31,6 +42,8 @@ function BaiViet() {
         title: "Bài viết nổi bật 2",
       },
     ]);
+
+    fetchData();
   }, []);
 
   const listBaiViet = {
@@ -123,11 +136,19 @@ function BaiViet() {
             alignItems={"center"}
           >
             {/* List bài viết */}
-            {listBaiViet.results.map((item, index) => {
+            {dataBaiViet.map((item, index) => {
               return <ItemBaiViet dataItem={item} key={index} />;
             })}
 
-            <Stack width={"100%"} px={2.5}>
+            <Stack
+              width={"100%"}
+              px={2.5}
+              py={1.25}
+              sx={{
+                borderTop: "0.3px dashed  #A9A9AC",
+                borderBottom: "0.3px dashed  #A9A9AC",
+              }}
+            >
               <Button
                 variant="contained"
                 sx={{

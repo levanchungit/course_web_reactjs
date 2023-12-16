@@ -7,6 +7,9 @@ function Blog() {
     <div className="App">
       {/* <ChiTietBaiViet /> */}
       <BaiViet />
+
+      {/* Chừa khoảng cách footer */}
+      <div style={{ marginBottom: "50px" }}></div>
       <Footer />
     </div>
   );

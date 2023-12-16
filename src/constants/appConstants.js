@@ -1,4 +1,5 @@
-export const API_BASE_URL = "";
+export const API_URL = "http://192.168.1.220:3000";
+
 export const LOGO_URL =
   "https://res.cloudinary.com/ddfyyysdw/image/upload/v1699691756/mecuyywr3glssuknyqu0.png";
 

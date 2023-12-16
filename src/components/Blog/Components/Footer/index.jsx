@@ -6,7 +6,7 @@ export default function Footer() {
     <React.Fragment>
       <CssBaseline />
       <AppBar
-        position="sticky"
+        position="fixed"
         sx={{
           bottom: 0,
           top: "auto",
