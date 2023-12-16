@@ -64,10 +64,10 @@ export default function Content() {
                         alignItems={"center"}
                         spacing={1.5}
                     >
-                        <Stack 
+                        <Stack
                             px={1.5}
                             py={0.5}
-                            borderRadius={1}
+                            borderRadius={2}
                             border={"1px solid #ddd"}
                         >
                             <Typography
@@ -75,7 +75,7 @@ export default function Content() {
                                 fontSize={14}
                                 fontFamily={"Open Sans"}
                                 fontWeight={"Regular"}
-                                color={"#ddd"}
+                                color={"#333"}
                                 lineHeight={1.5}
                             >
                                 {data.category ? data.category : ""}

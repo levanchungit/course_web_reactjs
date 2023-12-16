@@ -1,7 +1,7 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography, Link, } from "@mui/material";
-import ButtonCustom from "../../../ButtonCustom";
+import ButtonCustom from "../../ButtonCustom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
