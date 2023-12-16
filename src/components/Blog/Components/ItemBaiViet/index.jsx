@@ -64,7 +64,42 @@ function ItemBaiViet(props) {
             width={"100%"}
             flexWrap={"wrap"}
           >
-            {dataItem && dataItem.tittle ? dataItem.tittle : ""}
+            <Typography
+              fontSize={12}
+              fontSize={12}
+              fontFamily={"Montserrat"}
+              fontWeight={"Regular"}
+            >
+              Tags:{" "}
+            </Typography>
+            {dataItem &&
+              dataItem.category_names &&
+              dataItem.category_names.map((item, index) => {
+                return (
+                  <Button
+                    key={index}
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "4px",
+                      border: "1px solid #ddd",
+                      color: "#ddd",
+                      px: 0.5,
+                      py: 0.25,
+                    }}
+                  >
+                    <Typography
+                      align="center"
+                      fontSize={12}
+                      fontFamily={"Montserrat"}
+                      fontWeight={"Regular"}
+                      key={index}
+                      textTransform={"initial"}
+                    >
+                      {item}
+                    </Typography>
+                  </Button>
+                );
+              })}
           </Stack>
 
           <img
@@ -105,8 +140,8 @@ function ItemBaiViet(props) {
               fontSize: "16px",
               fontFamily: "Montserrat",
               fontWeight: "Regular",
+              width: "100%",
             }}
-            width={"100%"}
             variant="outlined"
           >
             Đọc thêm

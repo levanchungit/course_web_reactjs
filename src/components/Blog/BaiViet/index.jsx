@@ -13,6 +13,7 @@ function BaiViet() {
   const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({});
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
   const [dataBaiViet, setDataBaiViet] = React.useState([]);
+  const itemLoadingSkeletonDataBaiViet = 4;
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -69,36 +70,46 @@ function BaiViet() {
             alignItems={"center"}
           >
             {/* List bài viết */}
-            {dataBaiViet.length > 0 ? (
-              dataBaiViet.map((item, index) => {
-                return <ItemBaiViet dataItem={item} key={index} />;
-              })
-            ) : (
-              <Stack
-                width={"100%"}
-                direction={"column"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                px={2.5}
-                spacing={0}
-              >
-                <Skeleton
-                  width={"100%"}
-                  height={50}
-                  variant="text"
-                  sx={{ fontSize: "20px" }}
-                />
-                <Skeleton width={"10%"} variant="text" />
-                <Skeleton
-                  width={"100%"}
-                  variant="text"
-                  sx={{ fontSize: "20px" }}
-                />
-                <Skeleton variant="rectangular" width={"100%"} height={200} />
-                <Skeleton width={"100%"} height={40} />
-                <Skeleton width={"40%"} height={50} />
-              </Stack>
-            )}
+            {dataBaiViet.length > 0
+              ? dataBaiViet.map((item, index) => {
+                  return <ItemBaiViet dataItem={item} key={index} />;
+                })
+              : //loop 4
+                [...Array(itemLoadingSkeletonDataBaiViet)].map(
+                  (item, index) => {
+                    return (
+                      <Stack
+                        key={index}
+                        width={"100%"}
+                        direction={"column"}
+                        justifyContent={"center"}
+                        alignItems={"center"}
+                        px={2.5}
+                        spacing={0}
+                      >
+                        <Skeleton
+                          width={"100%"}
+                          height={50}
+                          variant="text"
+                          sx={{ fontSize: "20px" }}
+                        />
+                        <Skeleton width={"10%"} variant="text" />
+                        <Skeleton
+                          width={"100%"}
+                          variant="text"
+                          sx={{ fontSize: "20px" }}
+                        />
+                        <Skeleton
+                          variant="rectangular"
+                          width={"100%"}
+                          height={200}
+                        />
+                        <Skeleton width={"100%"} height={40} />
+                        <Skeleton width={"40%"} height={50} />
+                      </Stack>
+                    );
+                  }
+                )}
 
             <Stack
               width={"100%"}
