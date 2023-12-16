@@ -51,7 +51,7 @@ function Header(props) {
           }}
         >
           <Stack
-            width={isMediumScreen ? "100%" : "80%"}
+            width={isMediumScreen ? "100%" : "60%"}
             direction={isMediumScreen ? "column" : "row"}
             alignItems="center"
             justifyContent="space-between"
@@ -93,7 +93,7 @@ function Header(props) {
               alignItems="center"
               gap={isMediumScreen ? 2 : 0}
               sx={{
-                width: isMediumScreen ? "100%" : "80%",
+                width: isMediumScreen ? "100%" : "60%",
               }}
             >
               {isMediumScreen ? null : (

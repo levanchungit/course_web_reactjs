@@ -50,7 +50,7 @@ export const MENU_ITEMS = [
 
   {
     name: "Blog",
-    url: "/#",
+    url: "/blog",
     visible: true,
   },
 ];

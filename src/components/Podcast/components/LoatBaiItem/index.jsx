@@ -24,7 +24,7 @@ export default function LoatBaiItem({
         borderTop={"0.1px solid #DDDDDD"}
       >
         <Stack
-          width={isMediumScreen ? "100%" : "80%"}
+          width={isMediumScreen ? "100%" : "60%"}
           direction={isMediumScreen ? "column" : "row"}
           flexWrap={isMediumScreen ? "wrap" : "nowrap"}
           p={2.5}

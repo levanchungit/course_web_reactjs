@@ -134,8 +134,8 @@ const FabHoiDap = ({ openDialog }) => {
         position: "fixed",
         m: 0,
         top: "auto",
-        right: 20,
-        bottom: 20,
+        right: 10,
+        bottom: 60,
         left: "auto",
       }}
       aria-label="add"
