@@ -1,10 +1,12 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Skeleton, Stack, Typography } from "@mui/material";
+import { formatDateTime } from "../../../../utils/common";
 
 function ItemBaiViet(props) {
   const [dataItem, setDataItem] = React.useState(props.dataItem);
   const MAX_LENGTH_CONTENT = 443;
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -20,6 +22,8 @@ function ItemBaiViet(props) {
           flexWrap={"wrap"}
           p={2.5}
           spacing={1.25}
+          alignItems={"center"}
+          justifyContent={"center"}
         >
           <Typography
             width={"100%"}
@@ -34,18 +38,22 @@ function ItemBaiViet(props) {
             {dataItem && dataItem.tittle ? dataItem.tittle : ""}
           </Typography>
 
-          <Typography
-            width={"100%"}
-            align="center"
-            fontSize={12}
-            fontFamily={"Montserrat"}
-            fontWeight={"Regular"}
-            color={"#000"}
-            opacity={0.8}
-            textTransform={"uppercase"}
-          >
-            {dataItem && dataItem.createAt ? dataItem.createAt : ""}
-          </Typography>
+          <Stack direction={"row"} alignItems={"center"}>
+            <Typography
+              width={"100%"}
+              align="center"
+              fontSize={12}
+              fontFamily={"Montserrat"}
+              fontWeight={"Regular"}
+              color={"#000"}
+              opacity={0.8}
+              textTransform={"uppercase"}
+            >
+              {dataItem && dataItem.create_at
+                ? formatDateTime(dataItem.create_at)
+                : ""}
+            </Typography>
+          </Stack>
 
           <Stack
             direction={"row"}
@@ -56,36 +64,7 @@ function ItemBaiViet(props) {
             width={"100%"}
             flexWrap={"wrap"}
           >
-            <Typography>Tags:</Typography>
-
-            {dataItem &&
-              dataItem.category_names &&
-              dataItem.category_names.map((item, index) => {
-                return (
-                  <Button
-                    key={index}
-                    variant="outlined"
-                    sx={{
-                      borderRadius: "4px",
-                      border: "1px solid #ddd",
-                      color: "#ddd",
-                      px: 0.5,
-                      py: 0.25,
-                    }}
-                  >
-                    <Typography
-                      align="center"
-                      fontSize={12}
-                      fontFamily={"Montserrat"}
-                      fontWeight={"Regular"}
-                      key={index}
-                      textTransform={"initial"}
-                    >
-                      {item}
-                    </Typography>
-                  </Button>
-                );
-              })}
+            {dataItem && dataItem.tittle ? dataItem.tittle : ""}
           </Stack>
 
           <img
