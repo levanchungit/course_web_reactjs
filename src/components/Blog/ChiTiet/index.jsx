@@ -11,6 +11,7 @@ import TimKiem from "../Components/TimKiem";
 import GioiThieu from "../Components/GioiThieu";
 import BaiVietNoiBat from "../Components/BaiVietNoiBat";
 import DanhMuc from "../Components/DanhMuc";
+import HoatDong from "../Components/HoatDong";
 
 function ChiTietBaiViet() {
   const { isMediumScreen } = useMainValues();
@@ -92,6 +93,8 @@ function ChiTietBaiViet() {
             <BaiVietNoiBat data={dataBaiVietNoiBat} />
 
             <DanhMuc />
+
+            <HoatDong/>
           </Stack>
         </Stack>
       </Stack>

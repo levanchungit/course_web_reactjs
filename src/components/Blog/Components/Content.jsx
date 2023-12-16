@@ -1,6 +1,8 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 export default function Content() {
     const [data, setData] = React.useState([]);
@@ -95,12 +97,15 @@ export default function Content() {
                         {data.description ? data.description : ""}
                     </Typography>
 
-                    <Typography>
+                    <Typography
+                        borderRadius={2}
+                        overflow={"hidden"}
+                    >
                         <img
                             src={data.img1 ? data.img1 : ""}
                             alt="img"
                             width="100%"
-                            height="auto"
+                            height="100%"
                         />
                     </Typography>
 
@@ -114,16 +119,55 @@ export default function Content() {
                         {data.description ? data.description : ""}
                     </Typography>
 
-                    <Typography>
+                    <Typography
+                        borderRadius={2}
+                        overflow={"hidden"}
+                    >
                         <img
                             src={data.img2 ? data.img2 : ""}
                             alt="img"
                             width="100%"
-                            height="auto"
+                            height="100%"
                         />
                     </Typography>
                 </Stack>
+
+
             </Stack>
+
+            <Stack
+                width={"100%"}
+                direction={"row"}
+                px={2.5}
+                spacing={1}
+                alignItems={"center"}
+            >
+                <Button 
+                    variant="outlined" 
+                    startIcon={<ThumbUpIcon />}
+                >
+                    Like
+                </Button>
+
+                <Button 
+                    variant="outlined"
+                >
+                    Share
+                </Button>
+
+                <Typography
+                    align="left"
+                    fontSize={14}
+                    fontFamily={"Open Sans"}
+                    fontWeight={"Regular"}
+                    color={"#333"}
+                >
+                    1000 người thích nội dung này
+                </Typography>
+
+            </Stack>
+
+
 
         </React.Fragment>
     )
