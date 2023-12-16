@@ -25,7 +25,7 @@ export default function GioiThieu(props) {
         }}
       >
         <Stack
-          width={isMediumScreen ? "100%" : "80%"}
+          width={isMediumScreen ? "100%" : "60%"}
           direction={"row"}
           p={2.5}
           spacing={2}

@@ -1,10 +1,13 @@
 import * as React from "react";
-import ChiTietBaiViet from "./ChiTiet";
+import BaiViet from "./BaiViet";
+import Footer from "./Components/Footer";
 
 function Blog() {
   return (
     <div className="App">
-      <ChiTietBaiViet />
+      {/* <ChiTietBaiViet /> */}
+      <BaiViet />
+      <Footer />
     </div>
   );
 }
