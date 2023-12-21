@@ -1,11 +1,12 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Skeleton, Stack, Typography } from "@mui/material";
+import { formatDateTime } from "../../../../utils/common";
 
 function ItemBaiViet(props) {
-  console.log("props.dataItem", props.dataItem);
   const [dataItem, setDataItem] = React.useState(props.dataItem);
   const MAX_LENGTH_CONTENT = 443;
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -21,6 +22,8 @@ function ItemBaiViet(props) {
           flexWrap={"wrap"}
           p={2.5}
           spacing={1.25}
+          alignItems={"center"}
+          justifyContent={"center"}
         >
           <Typography
             width={"100%"}
@@ -35,18 +38,22 @@ function ItemBaiViet(props) {
             {dataItem && dataItem.tittle ? dataItem.tittle : ""}
           </Typography>
 
-          <Typography
-            width={"100%"}
-            align="center"
-            fontSize={12}
-            fontFamily={"Montserrat"}
-            fontWeight={"Regular"}
-            color={"#000"}
-            opacity={0.8}
-            textTransform={"uppercase"}
-          >
-            {dataItem && dataItem.createAt ? dataItem.createAt : ""}
-          </Typography>
+          <Stack direction={"row"} alignItems={"center"}>
+            <Typography
+              width={"100%"}
+              align="center"
+              fontSize={12}
+              fontFamily={"Montserrat"}
+              fontWeight={"Regular"}
+              color={"#000"}
+              opacity={0.8}
+              textTransform={"uppercase"}
+            >
+              {dataItem && dataItem.create_at
+                ? formatDateTime(dataItem.create_at)
+                : ""}
+            </Typography>
+          </Stack>
 
           <Stack
             direction={"row"}
@@ -57,8 +64,14 @@ function ItemBaiViet(props) {
             width={"100%"}
             flexWrap={"wrap"}
           >
-            <Typography>Tags:</Typography>
-
+            <Typography
+              fontSize={12}
+              fontSize={12}
+              fontFamily={"Montserrat"}
+              fontWeight={"Regular"}
+            >
+              Tags:{" "}
+            </Typography>
             {dataItem &&
               dataItem.category_names &&
               dataItem.category_names.map((item, index) => {
@@ -127,8 +140,8 @@ function ItemBaiViet(props) {
               fontSize: "16px",
               fontFamily: "Montserrat",
               fontWeight: "Regular",
+              width: "100%",
             }}
-            width={"100%"}
             variant="outlined"
           >
             Đọc thêm

@@ -21,10 +21,8 @@ export const MainProvider = ({ children }) => {
       try {
         const cachedData = localStorage.getItem("cachedData");
         if (cachedData) {
-          console.log("cachedData true");
           setYoutubeData(JSON.parse(cachedData));
         } else {
-          console.log("cachedData false");
           const data = await getYoutubeVideos(10);
           setYoutubeData(data);
           localStorage.setItem("cachedData", JSON.stringify(data));
