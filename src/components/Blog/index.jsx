@@ -1,12 +1,11 @@
 import * as React from "react";
-import BaiViet from "./BaiViet";
+import DanhSachBaiViet from "./DanhSachBaiViet";
 import Footer from "./Components/Footer";
-import ChiTietBaiViet from "./ChiTiet";
 
 function Blog() {
   return (
     <div className="App">
-      <BaiViet />
+      <DanhSachBaiViet />
 
       {/* Chừa khoảng cách footer */}
       <div style={{ marginBottom: "50px" }}></div>

@@ -1,14 +1,13 @@
 import * as React from "react";
-import { Button, Skeleton, Stack, Typography } from "@mui/material";
+import { Button, Skeleton, Stack } from "@mui/material";
 import { useMainValues } from "../../../contexts/MainContext";
 import TimKiem from "../Components/TimKiem";
 import GioiThieu from "../Components/GioiThieu";
 import BaiVietNoiBat from "../Components/BaiVietNoiBat";
-import ItemBaiViet from "../Components/ItemBaiViet";
-import moment from "moment";
+import ItemBaiViet from "../Components/ItemDanhSachBaiViet";
 import authAPI from "../../../api/BaiVietAPI";
 
-function BaiViet() {
+function DanhSachBaiViet() {
   const { isMediumScreen } = useMainValues();
   const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({});
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
@@ -161,4 +160,4 @@ function BaiViet() {
   );
 }
 
-export default BaiViet;
+export default DanhSachBaiViet;
