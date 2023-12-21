@@ -1,30 +1,28 @@
 import * as React from "react";
 import { Stack } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import Comment from "../Components/Comment";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import Comment from '../Components/Comment';
 import Content from "../Components/Content";
-import { useMainValues } from "../../../contexts/MainContext";
+import { useMediaQueryValues } from "../../../contexts/MediaQueryContext";
 import TimKiem from "../Components/TimKiem";
 import GioiThieu from "../Components/GioiThieu";
-import BaiVietNoiBat from "../Components/BaiVietNoiBat";
+import BaiVietNoiBac from "../Components/BaiVietNoiBac";
 import DanhMuc from "../Components/DanhMuc";
-import HoatDong from "../Components/HoatDong";
 
 function ChiTietBaiViet() {
-  const { isMediumScreen } = useMainValues();
+  const { isMediumScreen } = useMediaQueryValues();
   const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({});
-  const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
+  const [dataBaiVietNoiBac, setDataBaiVietNoiBac] = React.useState([]);
+  
   React.useEffect(() => {
     setDaGtaGioiThieu({
-      image:
-        "https://cdnmedia.baotintuc.vn/Upload/4l8oGGp94lA5r6lHXppg/files/2022/03/f0conennammaylanh.jpg",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae laoreet justo. Donec euismod, nisl eget ultricies aliquam, velit odio lacinia diam, in malesuada odio odio in velit. Sed non ornare nisl",
+      image: "https://cdnmedia.baotintuc.vn/Upload/4l8oGGp94lA5r6lHXppg/files/2022/03/f0conennammaylanh.jpg",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae laoreet justo. Donec euismod, nisl eget ultricies aliquam, velit odio lacinia diam, in malesuada odio odio in velit. Sed non ornare nisl",
     });
-    setDataBaiVietNoiBat([
+    setDataBaiVietNoiBac([  
       {
         _id: 1,
         title: "Bài viết nổi bật 1",
@@ -32,7 +30,7 @@ function ChiTietBaiViet() {
       {
         _id: 2,
         title: "Bài viết nổi bật 2",
-      },
+      }
     ]);
   }, []);
 
@@ -45,13 +43,13 @@ function ChiTietBaiViet() {
         backgroundColor={"#fff"}
       >
         <Stack
-          width={isMediumScreen ? "100%" : "60%"}
+          width={isMediumScreen ? "100%" : "80%"}
           direction={isMediumScreen ? "column" : "row"}
           justifyContent={"center"}
           alignItems={"flex-start"}
         >
           <Stack
-            width={isMediumScreen ? "100%" : "60%"}
+            width={isMediumScreen ? "100%" : "70%"}
             direction={"column"}
             justifyContent={"center"}
             alignItems={"center"}
@@ -61,7 +59,7 @@ function ChiTietBaiViet() {
           </Stack>
 
           <Stack
-            width={isMediumScreen ? "100%" : "40%"}
+            width={isMediumScreen ? "100%" : "30%"}
             direction={"column"}
             justifyContent={"center"}
             alignItems={"center"}
@@ -74,10 +72,23 @@ function ChiTietBaiViet() {
               width={"100%"}
               marginBottom={2}
             >
-              <FacebookIcon fontSize="large" onClick={() => {}} />
-              <LinkedInIcon fontSize="large" onClick={() => {}} />
-              <YouTubeIcon fontSize="large" onClick={() => {}} />
-              <InstagramIcon fontSize="large" onClick={() => {}} />
+              <FacebookIcon 
+                fontSize="large"
+                onClick={() => {}}
+              />
+              <LinkedInIcon 
+                fontSize="large"
+                onClick={() => {}}
+              />
+              <YouTubeIcon 
+                fontSize="large"
+                onClick={() => {}}
+              />
+              <InstagramIcon 
+                fontSize="large"
+                onClick={() => {}}
+              />
+
             </Stack>
 
             <TimKiem
@@ -88,16 +99,20 @@ function ChiTietBaiViet() {
               ariaLabel={"toggle password visibility"}
               position={"end"}
             />
-            <GioiThieu data={dagtaGioiThieu} />
+            <GioiThieu 
+              data={dagtaGioiThieu}
+            />
 
-            <BaiVietNoiBat data={dataBaiVietNoiBat} />
+            <BaiVietNoiBac
+              data={dataBaiVietNoiBac}
+            />
 
             <DanhMuc />
-
-            <HoatDong/>
           </Stack>
         </Stack>
       </Stack>
+
+
     </div>
   );
 }

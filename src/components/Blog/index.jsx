@@ -1,11 +1,11 @@
 import * as React from "react";
 import BaiViet from "./BaiViet";
 import Footer from "./Components/Footer";
+import ChiTietBaiViet from "./ChiTiet";
 
 function Blog() {
   return (
     <div className="App">
-      {/* <ChiTietBaiViet /> */}
       <BaiViet />
 
       {/* Chừa khoảng cách footer */}

@@ -14,8 +14,8 @@ export default function GioiThieu({ data }) {
                 width={'100%'}
                 borderLeft={2 / 8 + 'rem solid #000'}
             >
-                <Typography 
-                    variant="h6" 
+                <Typography
+                    variant="h6"
                     textTransform={"uppercase"}
                 >
                     Giới thiệu
@@ -27,8 +27,8 @@ export default function GioiThieu({ data }) {
                 width={'100%'}
                 height={'auto'}
             />
-            <Typography 
-                variant="body1" 
+            <Typography
+                variant="body1"
                 gutterBottom
                 textAlign={'justify'}
             >

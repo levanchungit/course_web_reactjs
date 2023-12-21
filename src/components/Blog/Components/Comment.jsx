@@ -1,12 +1,10 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography, Link, } from "@mui/material";
-import ButtonCustom from "../../../ButtonCustom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
-
-
+import Button from "@mui/material/Button";
 
 export default function Comment() {
     const [listComment, setListComment] = React.useState([]);
@@ -270,10 +268,19 @@ export default function Comment() {
                     maxRows={1}
                 />
 
-                <ButtonCustom
-                    btnText={"Gửi bình luận"}
-                    onClick={() => { console.log('click'); }}
-                />
+                <Button
+                    sx={{
+                        border: "1px solid #DAE2ED",
+                        color: '#333',
+                        borderRadius: "10px",
+                        textTransform: "none",
+                        fontSize: "1rem",
+                        fontFamily: "Open Sans",
+                    }}
+                    onClick={() => { }}
+                >
+                    Gửi bình luận
+                </Button>
             </Stack>
 
 
