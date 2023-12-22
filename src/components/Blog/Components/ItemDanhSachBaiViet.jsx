@@ -1,7 +1,7 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Stack, Typography } from "@mui/material";
-import { formatDateTime } from "../../../../utils/common";
+import { formatDateTime } from "../../../utils/common";
 import { Link } from "react-router-dom";
 
 function ItemDanhSachBaiViet(props) {
@@ -120,6 +120,7 @@ function ItemDanhSachBaiViet(props) {
             fontWeight={"Regular"}
             color={"#333"}
             width={"100%"}
+            overflow={"hidden"}
           >
             {dataItem && dataItem.content
               ? dataItem.content.length > MAX_LENGTH_CONTENT

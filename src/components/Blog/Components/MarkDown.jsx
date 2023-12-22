@@ -20,7 +20,7 @@ const fixImages = () => (tree) => {
   tree.children.forEach((node) => {
     if (node.tagName === "img" || node.tagName === "pre") {
       node.properties = node.properties || {};
-      node.properties.style = "max-width: 100%; height: auto;";
+      node.properties.style = "max-width: 100%; height: auto";
     }
   });
 };
