@@ -2,6 +2,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
+import MarkDown from "./MarkDown";
 
 export default function NoiDungBaiViet({ content }) {
   console.log("content ", content);
@@ -92,15 +93,7 @@ export default function NoiDungBaiViet({ content }) {
             />
           </Typography>
 
-          <Typography
-            align="justify"
-            fontSize={14}
-            fontFamily={"Montserrat"}
-            fontWeight={"Regular"}
-            color={"#333"}
-          >
-            {content?.content}
-          </Typography>
+          <MarkDown markdown={content?.content} />
         </Stack>
       </Stack>
     </React.Fragment>
