@@ -1,8 +1,8 @@
 import * as React from "react";
 import Footer from "./Components/Footer";
-import { Button, Skeleton, Stack } from "@mui/material";
+import { Button, Container, Skeleton, Stack, Typography } from "@mui/material";
 import { useMainValues } from "../../contexts/MainContext";
-import ItemBaiViet from "./Components/ItemDanhSachBaiViet";
+import ItemDanhSachBaiViet from "./Components/ItemDanhSachBaiViet";
 import authAPI from "../../api/BaiVietAPI";
 import Secondary from "./Components/Secondary";
 
@@ -67,69 +67,93 @@ function Blog() {
             alignItems={"center"}
           >
             {/* List bài viết */}
-            {dataBaiViet.length > 0
-              ? dataBaiViet.map((item, index) => {
-                  return <ItemBaiViet dataItem={item} key={index} />;
-                })
-              : //loop 4
-                [...Array(itemLoadingSkeletonDataBaiViet)].map(
-                  (item, index) => {
-                    return (
-                      <Stack
-                        key={index}
-                        width={"100%"}
-                        direction={"column"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        px={2.5}
-                        spacing={0}
-                      >
-                        <Skeleton
-                          width={"100%"}
-                          height={50}
-                          variant="text"
-                          sx={{ fontSize: "20px" }}
-                        />
-                        <Skeleton width={"10%"} variant="text" />
-                        <Skeleton
-                          width={"100%"}
-                          variant="text"
-                          sx={{ fontSize: "20px" }}
-                        />
-                        <Skeleton
-                          variant="rectangular"
-                          width={"100%"}
-                          height={200}
-                        />
-                        <Skeleton width={"100%"} height={40} />
-                        <Skeleton width={"40%"} height={50} />
-                      </Stack>
-                    );
-                  }
-                )}
+            {dataBaiViet.length > 0 ? (
+              dataBaiViet.map((item, index) => {
+                return (
+                  <>
+                    <ItemDanhSachBaiViet dataItem={item} key={index} />
+                    <Stack
+                      width={"100%"}
+                      px={2.5}
+                      py={1.25}
+                      sx={{
+                        borderTop: "0.3px dashed  #A9A9AC",
+                        borderBottom: "0.3px dashed  #A9A9AC",
+                      }}
+                    ></Stack>
+                  </>
+                );
+              })
+            ) : dataBaiViet.length == 0 ? (
+              // Create typography center screen
+              <Stack
+                width={"100%"}
+                direction={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                spacing={1.25}
+              >
+                <Typography
+                  align="center"
+                  fontSize={22}
+                  fontFamily={"Montserrat"}
+                  fontWeight={"Medium"}
+                  color={"#000"}
+                  opacity={0.8}
+                  textTransform={"uppercase"}
+                >
+                  Không có bài viết nào
+                </Typography>
+              </Stack>
+            ) : (
+              //loop 4
+              [...Array(itemLoadingSkeletonDataBaiViet)].map((item, index) => {
+                return (
+                  <Stack
+                    key={index}
+                    width={"100%"}
+                    direction={"column"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    px={2.5}
+                    spacing={0}
+                  >
+                    <Skeleton
+                      width={"100%"}
+                      height={50}
+                      variant="text"
+                      sx={{ fontSize: "20px" }}
+                    />
+                    <Skeleton width={"10%"} variant="text" />
+                    <Skeleton
+                      width={"100%"}
+                      variant="text"
+                      sx={{ fontSize: "20px" }}
+                    />
+                    <Skeleton
+                      variant="rectangular"
+                      width={"100%"}
+                      height={200}
+                    />
+                    <Skeleton width={"100%"} height={40} />
+                    <Skeleton width={"40%"} height={50} />
+                  </Stack>
+                );
+              })
+            )}
 
-            <Stack
-              width={"100%"}
-              px={2.5}
-              py={1.25}
+            <Button
+              variant="contained"
               sx={{
-                borderTop: "0.3px dashed  #A9A9AC",
-                borderBottom: "0.3px dashed  #A9A9AC",
+                borderRadius: "8px",
+                color: "#ddd",
+                bgcolor: "#000",
+                textTransform: "initial",
+                fontSize: "16px",
               }}
             >
-              <Button
-                variant="contained"
-                sx={{
-                  borderRadius: "8px",
-                  color: "#ddd",
-                  bgcolor: "#000",
-                  textTransform: "initial",
-                  fontSize: "16px",
-                }}
-              >
-                Xem các bài cũ hơn
-              </Button>
-            </Stack>
+              Xem các bài cũ hơn
+            </Button>
           </Stack>
 
           {/* SECONDARY */}

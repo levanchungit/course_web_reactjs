@@ -5,7 +5,6 @@ import { formatDateTime } from "../../../utils/common";
 import MarkDown from "./MarkDown";
 
 export default function NoiDungBaiViet({ content }) {
-  console.log("content ", content);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -31,7 +30,7 @@ export default function NoiDungBaiViet({ content }) {
             opacity={0.8}
             textTransform={"uppercase"}
           >
-            {content?.tittle}
+            {content?.title}
           </Typography>
 
           <Typography

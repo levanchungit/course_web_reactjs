@@ -3,10 +3,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import { Link } from "react-router-dom";
+import MarkDown from "./MarkDown";
 
 function ItemDanhSachBaiViet(props) {
   const [dataItem] = React.useState(props.dataItem);
-  const MAX_LENGTH_CONTENT = 443;
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -22,8 +23,7 @@ function ItemDanhSachBaiViet(props) {
           flexWrap={"wrap"}
           p={2.5}
           spacing={1.25}
-          alignItems={"center"}
-          justifyContent={"center"}
+          textAlign={"justify"}
         >
           <Typography
             width={"100%"}
@@ -35,7 +35,7 @@ function ItemDanhSachBaiViet(props) {
             opacity={0.8}
             textTransform={"uppercase"}
           >
-            {dataItem && dataItem.tittle ? dataItem.tittle : ""}
+            {dataItem && dataItem.title ? dataItem.title : ""}
           </Typography>
 
           <Stack direction={"row"} alignItems={"center"}>
@@ -101,33 +101,13 @@ function ItemDanhSachBaiViet(props) {
               })}
           </Stack>
 
-          <img
-            src={dataItem && dataItem.cover_image ? dataItem.cover_image : ""}
-            alt="img"
-            width={"100%"}
-            height={"200px"}
-            style={{
-              objectFit: "cover",
-              objectPosition: "center",
-              borderRadius: "8px",
-            }}
-          />
-
-          <Typography
-            align="justify"
-            fontSize={16}
-            fontFamily={"Montserrat"}
-            fontWeight={"Regular"}
-            color={"#333"}
-            width={"100%"}
-            overflow={"hidden"}
-          >
-            {dataItem && dataItem.content
-              ? dataItem.content.length > MAX_LENGTH_CONTENT
-                ? dataItem.content.substr(0, MAX_LENGTH_CONTENT) + "..."
+          <MarkDown
+            markdown={
+              dataItem.content.length > 400
+                ? dataItem.content.substring(0, 400) + "..."
                 : dataItem.content
-              : ""}
-          </Typography>
+            }
+          />
 
           {dataItem && dataItem.slug && (
             <Link

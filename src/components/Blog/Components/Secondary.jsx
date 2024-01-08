@@ -16,7 +16,7 @@ import { useMainValues } from "../../../contexts/MainContext";
 import { Search } from "@mui/icons-material";
 
 export default function Secondary() {
-  const { isMediumScreen } = useMainValues();
+  const { isSmallScreen, isMediumScreen } = useMainValues();
   const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({
     image:
       "https://res.cloudinary.com/ddfyyysdw/image/upload/v1703257175/fwi712gioawm3dbazzvh.jpg",
@@ -114,6 +114,7 @@ export default function Secondary() {
       direction={"column"}
       justifyContent={"center"}
       alignItems={"center"}
+      p={isMediumScreen ? "20px" : "0"}
     >
       {/*LIST ICON SOCIAL */}
       <Stack
@@ -187,9 +188,11 @@ export default function Secondary() {
         <img
           src={dagtaGioiThieu?.image}
           alt={dagtaGioiThieu?.title}
-          width={isMediumScreen ? "40%" : "100%"}
+          // width={isMediumScreen ? "40%" : "100%"}
           height="auto"
           style={{
+            maxWidth: "100%",
+            height: "300px",
             objectFit: "cover",
             borderRadius: 8,
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

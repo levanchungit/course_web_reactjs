@@ -5,22 +5,30 @@ import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeSanitize from "rehype-sanitize";
 
 const removeParagraphTags = () => (tree) => {
+  const newChildren = [];
+
   tree.children.forEach((node) => {
-    if (
-      node.tagName === "p" &&
-      node.children.length === 1 &&
-      node.children[0].tagName === "img"
-    ) {
-      tree.children.splice(tree.children.indexOf(node), 1, node.children[0]);
+    if (node.tagName === "p" && tree.tagName !== "pre") {
+      // Append the children of the <p> node to the newChildren array
+      newChildren.push(...node.children);
+    } else {
+      // Keep other nodes as they are
+      newChildren.push(node);
     }
   });
+
+  // Replace the existing children array with the new one
+  tree.children = newChildren;
 };
 
 const fixImages = () => (tree) => {
   tree.children.forEach((node) => {
     if (node.tagName === "img" || node.tagName === "pre") {
       node.properties = node.properties || {};
-      node.properties.style = "max-width: 100%; height: auto";
+      node.properties.style =
+        "max-width: 100%; height: 400px; object-fit: cover";
+      // Thêm border-radius và các thuộc tính CSS khác nếu cần
+      node.properties.style += "; border-radius: 20px";
     }
   });
 };
