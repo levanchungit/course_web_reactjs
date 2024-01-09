@@ -23,7 +23,6 @@ function ChiTietBaiViet() {
           direction={isMediumScreen ? "column" : "row"}
           justifyContent={"center"}
           alignItems={"flex-start"}
-          border={"1px solid pink"}
         >
           <Stack
             width={isMediumScreen ? "100%" : "60%"}
@@ -31,7 +30,7 @@ function ChiTietBaiViet() {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <NoiDungBaiViet content={state.chiTietBaiViet} />
+            {/* <NoiDungBaiViet content={state.chiTietBaiViet} /> */}
             <BinhLuan />
           </Stack>
 

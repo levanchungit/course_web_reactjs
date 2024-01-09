@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Stack, Typography, Link } from "@mui/material";
+import { Stack, Typography, Link, TextField } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
@@ -60,7 +60,7 @@ export default function BinhLuan() {
               >
                 {item.username}
               </Typography>
-              {/* dateComment va - tra loi nam trn 1 dong */}
+
               <Stack
                 direction={"row"}
                 justifyContent={"flex-start"}
@@ -98,6 +98,7 @@ export default function BinhLuan() {
               >
                 {item.content}
               </Typography>
+
               <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
@@ -206,16 +207,18 @@ export default function BinhLuan() {
             : "Chưa có bình luận nào"}
         </Typography>
       </Stack>
+
       {listComment.map((item, index) => {
         return <CommentItem key={item._id} item={item} />;
       })}
-      ;
+
       <Stack
         width={"100%"}
         direction={"column"}
         justifyContent={"flex-start"}
         p={2.5}
         backgroundColor={"#ffffff"}
+        spacing={2}
       >
         <Typography
           align="left"
@@ -239,24 +242,16 @@ export default function BinhLuan() {
           Địa chỉ email của bạn sẽ được Chung giữ bí mật cho nhé !
         </Typography>
 
-        <TextareaAutosize
-          aria-label="minimum height"
-          minRows={5}
-          placeholder="Nhập bình luận của bạn"
+        <TextField
+          label="Nhập bình luận của bạn"
+          multiline
+          rows={5}
           maxRows={5}
         />
 
-        <TextareaAutosize
-          aria-label="minimum height"
-          placeholder="Tên của bạn"
-          maxRows={1}
-        />
+        <TextField label="Tên của bạn" />
 
-        <TextareaAutosize
-          aria-label="minimum height"
-          placeholder="Email của bạn"
-          maxRows={1}
-        />
+        <TextField label="Email của bạn" />
 
         <Button
           sx={{
