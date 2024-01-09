@@ -1,6 +1,6 @@
 import * as React from "react";
 import Footer from "./Components/Footer";
-import { Button, Container, Skeleton, Stack, Typography } from "@mui/material";
+import { Button, Skeleton, Stack, Typography } from "@mui/material";
 import { useMainValues } from "../../contexts/MainContext";
 import ItemDanhSachBaiViet from "./Components/ItemDanhSachBaiViet";
 import authAPI from "../../api/BaiVietAPI";
@@ -8,25 +8,59 @@ import Secondary from "./Components/Secondary";
 
 function Blog() {
   const { isMediumScreen } = useMainValues();
-  const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
   const [dataBaiViet, setDataBaiViet] = React.useState([]);
-  const itemLoadingSkeletonDataBaiViet = 4;
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [limitPost, setLimitPost] = React.useState(5);
+  const [loading, setLoading] = React.useState(false);
+  const [hasMoreData, setHasMoreData] = React.useState(true);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await authAPI.getPosts(currentPage, limitPost);
+
+      if (response.status === 200) {
+        const { total, page, limit } = response.data;
+        console.log("rs ", response.data.results);
+        if (page === 1) {
+          setDataBaiViet(response.data.results);
+        } else {
+          // Lần sau, lấy dữ liệu mới mà không trùng với dữ liệu hiện tại
+          const newData = response.data.results.filter(
+            (newItem) =>
+              !dataBaiViet.some((item) => item.title === newItem.title)
+          );
+          setDataBaiViet((prevData) => [...prevData, ...newData]);
+
+          // Kiểm tra xem có thêm dữ liệu để tải không
+          setHasMoreData(total > page * limit);
+        }
+      }
+    } catch (e) {
+      console.log("error: ", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log("dataBaiViet", dataBaiViet.length);
+  console.log("hasMoreData", hasMoreData);
+  console.log("currentPage", currentPage);
+
+  const handleLoadMore = () => {
+    if (hasMoreData) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      setHasMoreData(false);
+    }
+  };
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await authAPI.getPosts(1, 10, "created_at");
-        console.log("response: ", response);
-        if (response.status === 200) {
-          setDataBaiViet(response.data.results);
-        }
-      } catch (e) {
-        console.log("error: ", e);
-      }
-    };
+    if (hasMoreData) {
+      fetchData();
+    }
+  }, [currentPage, hasMoreData]);
 
-    fetchData();
-  }, []);
   return (
     <div className="App">
       <Stack
@@ -48,12 +82,42 @@ function Blog() {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            {/* List bài viết */}
-            {dataBaiViet.length > 0 ? (
-              dataBaiViet.map((item, index) => {
-                return <ItemDanhSachBaiViet dataItem={item} key={index} />;
-              })
-            ) : dataBaiViet.length == 0 ? (
+            {loading ? (
+              // Hiển thị Skeleton khi đang tải dữ liệu
+              [...Array(limitPost)].map((_, index) => (
+                <Stack
+                  key={index}
+                  width={"100%"}
+                  direction={"column"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  px={2.5}
+                  spacing={0}
+                >
+                  <Skeleton
+                    width={"100%"}
+                    height={50}
+                    variant="text"
+                    sx={{ fontSize: "20px" }}
+                  />
+                  <Skeleton width={"10%"} variant="text" />
+                  <Skeleton
+                    width={"100%"}
+                    variant="text"
+                    sx={{ fontSize: "20px" }}
+                  />
+                  <Skeleton variant="rectangular" width={"100%"} height={200} />
+                  <Skeleton width={"100%"} height={40} />
+                  <Skeleton width={"40%"} height={50} />
+                </Stack>
+              ))
+            ) : dataBaiViet.length > 0 ? (
+              // Hiển thị dữ liệu bài viết khi có dữ liệu
+              dataBaiViet.map((item, index) => (
+                <ItemDanhSachBaiViet dataItem={item} key={index} />
+              ))
+            ) : (
+              // Hiển thị thông báo khi không có bài viết
               <Stack
                 width={"100%"}
                 direction={"column"}
@@ -73,55 +137,24 @@ function Blog() {
                   Không có bài viết nào
                 </Typography>
               </Stack>
-            ) : (
-              //loop 4
-              [...Array(itemLoadingSkeletonDataBaiViet)].map((index) => {
-                return (
-                  <Stack
-                    key={index}
-                    width={"100%"}
-                    direction={"column"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    px={2.5}
-                    spacing={0}
-                  >
-                    <Skeleton
-                      width={"100%"}
-                      height={50}
-                      variant="text"
-                      sx={{ fontSize: "20px" }}
-                    />
-                    <Skeleton width={"10%"} variant="text" />
-                    <Skeleton
-                      width={"100%"}
-                      variant="text"
-                      sx={{ fontSize: "20px" }}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={200}
-                    />
-                    <Skeleton width={"100%"} height={40} />
-                    <Skeleton width={"40%"} height={50} />
-                  </Stack>
-                );
-              })
             )}
 
-            <Button
-              variant="contained"
-              sx={{
-                borderRadius: "8px",
-                color: "#ddd",
-                bgcolor: "#000",
-                textTransform: "initial",
-                fontSize: "16px",
-              }}
-            >
-              Xem các bài cũ hơn
-            </Button>
+            <Stack width={"100%"} p={2.5}>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={handleLoadMore}
+                sx={{
+                  borderRadius: "8px",
+                  color: "#ddd",
+                  bgcolor: "#000",
+                  textTransform: "initial",
+                  fontSize: "16px",
+                }}
+              >
+                {loading ? "Đang tải..." : "Xem các bài cũ hơn"}
+              </Button>
+            </Stack>
           </Stack>
 
           {/* SECONDARY */}
