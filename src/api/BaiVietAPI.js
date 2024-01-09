@@ -7,6 +7,12 @@ const baiVietAPI = {
       `${API_URL}/api/posts?page=${page}&limit=${limit}&sort=${sort}`
     );
   },
+
+  async getPostsPopular(page = 1, limit = 5, sort = "created_at") {
+    return await axios.get(
+      `${API_URL}/api/posts/popular?page=${page}&limit=${limit}&sort=${sort}`
+    );
+  },
 };
 
 export default baiVietAPI;

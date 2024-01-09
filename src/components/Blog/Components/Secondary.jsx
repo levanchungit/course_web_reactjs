@@ -16,9 +16,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import { useMainValues } from "../../../contexts/MainContext";
 import { Search } from "@mui/icons-material";
 import tacGiaAPI from "../../../api/TacGiaAPI";
+import theLoaiAPI from "../../../api/TheLoaiAPI";
+import baiVietAPI from "../../../api/BaiVietAPI";
 
 export default function Secondary() {
-  const { isSmallScreen, isMediumScreen } = useMainValues();
+  const { isMediumScreen } = useMainValues();
   const [dataTacGia, setDataTacGia] = React.useState({
     email: "levanchung.webcourse@gmail.com",
     author: {
@@ -61,6 +63,7 @@ export default function Secondary() {
       imgUrl: "https://picsum.photos/200/300",
     },
   ]);
+  const [dataDanhMuc, setDataDanhMuc] = React.useState([]);
   const data = [
     {
       _id: 1,
@@ -119,10 +122,9 @@ export default function Secondary() {
   ];
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAuthor = async () => {
       try {
         const response = await tacGiaAPI.getAuthor();
-        console.log("response tacGiaAPI: ", response);
         if (response.status === 200) {
           setDataTacGia(response.data.result);
           console.log("response.result ", response.data.result);
@@ -132,7 +134,33 @@ export default function Secondary() {
       }
     };
 
-    fetchData();
+    const fetchDataCategories = async () => {
+      try {
+        const response = await theLoaiAPI.getCategories();
+        if (response.status === 200) {
+          setDataDanhMuc(response.data.results);
+          console.log("response.result ", response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    const fetchDataPostsPopular = async () => {
+      try {
+        const response = await baiVietAPI.getPostsPopular();
+        if (response.status === 200) {
+          setDataBaiVietNoiBat(response.data.results);
+          console.log("response.result ", response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    fetchDataAuthor();
+    fetchDataCategories();
+    fetchDataPostsPopular();
   }, []);
 
   return (
@@ -142,6 +170,7 @@ export default function Secondary() {
       justifyContent={"center"}
       alignItems={"center"}
       p={isMediumScreen ? "20px" : "0"}
+      spacing={2}
     >
       {/*LIST ICON SOCIAL */}
       <Stack
@@ -180,11 +209,8 @@ export default function Secondary() {
 
       {/* INPUT SEARCH */}
       <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-        <InputLabel htmlFor={"outlined-adornment-password"}>
-          {"Search"}
-        </InputLabel>
+        <InputLabel>{"Search"}</InputLabel>
         <OutlinedInput
-          id={"outlined-adornment-password"}
           type={"text"}
           sx={{ borderRadius: "8px" }}
           endAdornment={
@@ -210,7 +236,6 @@ export default function Secondary() {
       {/* GIỚI THIỆU */}
       <Stack
         spacing={2}
-        marginY={2}
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -251,13 +276,7 @@ export default function Secondary() {
       </Stack>
 
       {/* BÀI VIẾT NỔI BẬT */}
-      <Stack
-        marginY={2}
-        spacing={2}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        width={"100%"}
-      >
+      <Stack flexDirection={"column"} justifyContent={"center"} width={"100%"}>
         <Stack
           width={"100%"}
           borderLeft={2 / 8 + "rem solid #000"}
@@ -274,34 +293,49 @@ export default function Secondary() {
             Bài viết nổi bật
           </Typography>
         </Stack>
-        {dataBaiVietNoiBat
-          ? dataBaiVietNoiBat.map((item, index) => {
-              return (
-                <Stack key={index}>
+
+        <Stack
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"stretch"}
+          gap={0.8}
+          p={1}
+        >
+          {dataBaiVietNoiBat
+            ? dataBaiVietNoiBat.map((item, index) => {
+                return (
                   <Typography
+                    overflow={"hidden"}
+                    key={index}
                     align="justify"
                     fontSize={12}
                     fontFamily={"Montserrat"}
                     fontStyle={"Regular"}
-                    key={index}
                     onClick={() => {
                       alert("Chức năng này đang được phát triển");
                     }}
                     sx={{
                       cursor: "pointer",
+                      width: "100%",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      // hover under
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
                     }}
                   >
                     &#8226; {item.title}
                   </Typography>
-                </Stack>
-              );
-            })
-          : null}
+                );
+              })
+            : null}
+        </Stack>
       </Stack>
 
       {/* DANH MỤC */}
       <Stack
-        marginY={2}
         spacing={2}
         flexDirection={"column"}
         justifyContent={"center"}
@@ -328,10 +362,12 @@ export default function Secondary() {
           direction={"row"}
           justifyContent={"center"}
           alignItems={"center"}
-          spacing={1.5}
+          useFlexGap
+          flexWrap="wrap"
+          gap={1}
         >
-          {data.length > 0
-            ? data.map((item, index) => {
+          {dataDanhMuc.length > 0
+            ? dataDanhMuc.map((item, index) => {
                 return (
                   <Button
                     key={index}
@@ -353,41 +389,9 @@ export default function Secondary() {
                       textTransform={"initial"}
                       color={"black"}
                     >
-                      {item.title}
+                      {item.name}
                     </Typography>
                   </Button>
-                );
-              })
-            : null}
-        </Stack>
-
-        <Stack
-          direction={"column"}
-          justifyContent={"flex-start"}
-          alignItems={"flex-start"}
-          spacing={1.5}
-        >
-          {data1 && data1.length > 0
-            ? data1.map((item, index) => {
-                return (
-                  <Stack
-                    key={index}
-                    px={1.5}
-                    py={0.5}
-                    borderRadius={3}
-                    border={"1px solid #ddd"}
-                  >
-                    <Typography
-                      align="justify"
-                      fontSize={12}
-                      fontFamily={"Montserrat"}
-                      fontStyle={"Regular"}
-                      color={"black"}
-                      lineHeight={1.5}
-                    >
-                      {item.content}
-                    </Typography>
-                  </Stack>
                 );
               })
             : null}

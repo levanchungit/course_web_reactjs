@@ -25,7 +25,7 @@ function ChiTietBaiViet() {
           alignItems={"flex-start"}
         >
           <Stack
-            width={isMediumScreen ? "100%" : "60%"}
+            width={isMediumScreen ? "100%" : "70%"}
             direction={"column"}
             justifyContent={"center"}
             alignItems={"center"}

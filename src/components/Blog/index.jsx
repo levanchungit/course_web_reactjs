@@ -8,7 +8,6 @@ import Secondary from "./Components/Secondary";
 
 function Blog() {
   const { isMediumScreen } = useMainValues();
-  const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({});
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
   const [dataBaiViet, setDataBaiViet] = React.useState([]);
   const itemLoadingSkeletonDataBaiViet = 4;
@@ -25,23 +24,6 @@ function Blog() {
         console.log("error: ", e);
       }
     };
-
-    setDaGtaGioiThieu({
-      image:
-        "https://cdnmedia.baotintuc.vn/Upload/4l8oGGp94lA5r6lHXppg/files/2022/03/f0conennammaylanh.jpg",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae laoreet justo. Donec euismod, nisl eget ultricies aliquam, velit odio lacinia diam, in malesuada odio odio in velit. Sed non ornare nisl",
-    });
-    setDataBaiVietNoiBat([
-      {
-        _id: 1,
-        title: "Bài viết nổi bật 1",
-      },
-      {
-        _id: 2,
-        title: "Bài viết nổi bật 2",
-      },
-    ]);
 
     fetchData();
   }, []);
@@ -69,22 +51,9 @@ function Blog() {
             {/* List bài viết */}
             {dataBaiViet.length > 0 ? (
               dataBaiViet.map((item, index) => {
-                return (
-                  <>
-                    <ItemDanhSachBaiViet dataItem={item} key={index} />
-                    <Stack
-                      width={"100%"}
-                      px={2.5}
-                      py={1.25}
-                      sx={{
-                        borderBottom: "0.3px dashed  #A9A9AC",
-                      }}
-                    ></Stack>
-                  </>
-                );
+                return <ItemDanhSachBaiViet dataItem={item} key={index} />;
               })
             ) : dataBaiViet.length == 0 ? (
-              // Create typography center screen
               <Stack
                 width={"100%"}
                 direction={"column"}
@@ -106,7 +75,7 @@ function Blog() {
               </Stack>
             ) : (
               //loop 4
-              [...Array(itemLoadingSkeletonDataBaiViet)].map((item, index) => {
+              [...Array(itemLoadingSkeletonDataBaiViet)].map((index) => {
                 return (
                   <Stack
                     key={index}

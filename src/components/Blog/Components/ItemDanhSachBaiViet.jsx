@@ -24,6 +24,7 @@ function ItemDanhSachBaiViet(props) {
           p={2.5}
           spacing={1.25}
           textAlign={"justify"}
+          borderBottom={"0.1px dashed  #A9A9AC"}
         >
           <Typography
             width={"100%"}

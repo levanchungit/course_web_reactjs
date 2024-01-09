@@ -146,7 +146,7 @@ export default function BinhLuan() {
         </Typography>
       </Stack>
 
-      {listComment.map((item, index) => {
+      {listComment.map((item) => {
         return <CommentItem key={item._id} item={item} />;
       })}
 
