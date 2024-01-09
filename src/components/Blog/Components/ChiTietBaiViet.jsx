@@ -30,7 +30,7 @@ function ChiTietBaiViet() {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            {/* <NoiDungBaiViet content={state.chiTietBaiViet} /> */}
+            <NoiDungBaiViet content={state.chiTietBaiViet} />
             <BinhLuan />
           </Stack>
 

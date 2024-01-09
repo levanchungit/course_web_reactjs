@@ -1,8 +1,9 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import MarkDown from "./MarkDown";
+import { Link } from "react-router-dom";
 
 export default function NoiDungBaiViet({ content }) {
   return (
@@ -62,35 +63,31 @@ export default function NoiDungBaiViet({ content }) {
             </Typography>
             {content?.category_names?.map((item, index) => {
               return (
-                <Stack
+                <Button
                   key={index}
-                  px={1.5}
-                  py={0.5}
-                  borderRadius={2}
-                  border={"1px solid #ddd"}
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "4px",
+                    border: "1px solid #ddd",
+                    color: "#ddd",
+                    px: 0.5,
+                    py: 0.25,
+                  }}
                 >
                   <Typography
+                    align="center"
                     fontSize={12}
                     fontFamily={"Montserrat"}
                     fontWeight={"Regular"}
-                    color={"#A9A9AC"}
-                    opacity={0.8}
+                    textTransform={"initial"}
+                    color="black"
                   >
                     {item}
                   </Typography>
-                </Stack>
+                </Button>
               );
             })}
           </Stack>
-
-          <Typography borderRadius={2} overflow={"hidden"}>
-            <img
-              src={content?.cover_image}
-              alt="img"
-              width="100%"
-              height="100%"
-            />
-          </Typography>
 
           <MarkDown markdown={content?.content} />
         </Stack>

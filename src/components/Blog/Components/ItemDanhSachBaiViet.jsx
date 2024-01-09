@@ -93,6 +93,7 @@ function ItemDanhSachBaiViet(props) {
                       fontWeight={"Regular"}
                       key={index}
                       textTransform={"initial"}
+                      color="black"
                     >
                       {item}
                     </Typography>

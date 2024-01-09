@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  Button,
   FormControl,
   IconButton,
   InputAdornment,
@@ -14,14 +15,23 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useMainValues } from "../../../contexts/MainContext";
 import { Search } from "@mui/icons-material";
+import tacGiaAPI from "../../../api/TacGiaAPI";
 
 export default function Secondary() {
   const { isSmallScreen, isMediumScreen } = useMainValues();
-  const [dagtaGioiThieu, setDaGtaGioiThieu] = React.useState({
-    image:
-      "https://res.cloudinary.com/ddfyyysdw/image/upload/v1703257175/fwi712gioawm3dbazzvh.jpg",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae laoreet justo. Donec euismod, nisl eget ultricies aliquam, velit odio lacinia diam, in malesuada odio odio in velit. Sed non ornare nisl",
+  const [dataTacGia, setDataTacGia] = React.useState({
+    email: "levanchung.webcourse@gmail.com",
+    author: {
+      instagram: "https://www.instagram.com/levanchung.it/",
+      linkedin: "https://www.linkedin.com/in/levanchung/",
+      youtube: "https://www.youtube.com/channel/UCCA0ty3anrudXp-PZ3gPIfQ",
+      avatar:
+        "https://res.cloudinary.com/ddfyyysdw/image/upload/v1704787052/dhwz4mji3zym0k2ncmjg.png",
+      facebook: "https://www.facebook.com/levanchung.it/",
+      introduction:
+        "Lorem ipsum dolor sit amet consectetur. Sed erat mattis eros suspendisse mauris sit. Eleifend risus pulvinar purus interdum cursus quam ullamcorper ultricies. Sit nulla sit tristique in sem adipiscing. Ante cursus massa nunc morbi nulla nunc duis.",
+      name: "Lê Văn Chung",
+    },
   });
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([
     {
@@ -108,6 +118,23 @@ export default function Secondary() {
     },
   ];
 
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await tacGiaAPI.getAuthor();
+        console.log("response tacGiaAPI: ", response);
+        if (response.status === 200) {
+          setDataTacGia(response.data.result);
+          console.log("response.result ", response.data.result);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Stack
       width={isMediumScreen ? "100%" : "30%"}
@@ -123,16 +150,30 @@ export default function Secondary() {
         alignItems={"center"}
         width={"100%"}
       >
-        <IconButton sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}>
+        {/* Open 1 new web browser */}
+
+        <IconButton
+          onClick={() => window.open(dataTacGia.author.facebook)}
+          sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}
+        >
           <FacebookIcon />
         </IconButton>
-        <IconButton sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}>
+        <IconButton
+          onClick={() => window.open(dataTacGia.author.linkedin)}
+          sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}
+        >
           <LinkedInIcon />
         </IconButton>
-        <IconButton sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}>
+        <IconButton
+          onClick={() => window.open(dataTacGia.author.youtube)}
+          sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}
+        >
           <YouTubeIcon />
         </IconButton>
-        <IconButton sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}>
+        <IconButton
+          onClick={() => window.open(dataTacGia.author.instagram)}
+          sx={{ fontSize: 24, color: "black", p: "10px", m: "10px" }}
+        >
           <InstagramIcon />
         </IconButton>
       </Stack>
@@ -186,8 +227,8 @@ export default function Secondary() {
           </Typography>
         </Stack>
         <img
-          src={dagtaGioiThieu?.image}
-          alt={dagtaGioiThieu?.title}
+          src={dataTacGia.author.avatar}
+          alt={dataTacGia.author.title}
           // width={isMediumScreen ? "40%" : "100%"}
           height="auto"
           style={{
@@ -205,7 +246,7 @@ export default function Secondary() {
           gutterBottom
           textAlign={"justify"}
         >
-          {dagtaGioiThieu?.content}
+          {dataTacGia.author.introduction}
         </Typography>
       </Stack>
 
@@ -292,24 +333,29 @@ export default function Secondary() {
           {data.length > 0
             ? data.map((item, index) => {
                 return (
-                  <Stack
+                  <Button
                     key={index}
-                    px={1.5}
-                    py={0.5}
-                    borderRadius={1}
-                    border={"1px solid #ddd"}
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "4px",
+                      border: "1px solid #ddd",
+                      color: "#ddd",
+                      px: 0.5,
+                      py: 0.25,
+                    }}
                   >
                     <Typography
                       align="center"
                       fontSize={12}
                       fontFamily={"Montserrat"}
-                      fontStyle={"Regular"}
-                      color={"#333"}
-                      lineHeight={1.5}
+                      fontWeight={"Regular"}
+                      key={index}
+                      textTransform={"initial"}
+                      color={"black"}
                     >
                       {item.title}
                     </Typography>
-                  </Stack>
+                  </Button>
                 );
               })
             : null}
