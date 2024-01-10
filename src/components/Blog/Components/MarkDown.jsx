@@ -4,36 +4,72 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import rehypeSanitize from "rehype-sanitize";
 
-const removeParagraphTags = () => (tree) => {
-  const newChildren = [];
-
+const fixParagraphs = () => (tree) => {
+  let newChildren = [];
+  let foundFirstParagraph = false;
+  console.log(tree);
   tree.children.forEach((node) => {
-    if (node.tagName === "p" && tree.tagName !== "pre") {
-      // Append the children of the <p> node to the newChildren array
-      newChildren.push(...node.children);
-    } else {
-      // Keep other nodes as they are
+    if (node.tagName === "p" && !foundFirstParagraph) {
+      // Nếu là đoạn văn bản và chưa tìm thấy đoạn văn bản, thêm vào danh sách và đánh dấu đã tìm thấy
       newChildren.push(node);
+      foundFirstParagraph = true;
+    } else if (node.tagName === "img" && !foundFirstParagraph) {
+      // Nếu là hình ảnh và chưa tìm   thấy đoạn văn bản, thêm vào danh sách
+      newChildren.push(node);
+      foundFirstParagraph = true;
     }
   });
 
-  // Replace the existing children array with the new one
   tree.children = newChildren;
 };
 
-const fixImages = () => (tree) => {
+const fixFormat = () => (tree) => {
   tree.children.forEach((node) => {
-    if (node.tagName === "img" || node.tagName === "pre") {
-      node.properties = node.properties || {};
-      node.properties.style =
-        "max-width: 100%; height: 400px; object-fit: cover";
-      // Thêm border-radius và các thuộc tính CSS khác nếu cần
-      node.properties.style += "; border-radius: 20px";
+    if (node.tagName === "p") {
+      node.children.forEach((child, index, arr) => {
+        if (child.tagName === "img" || child.tagName === "pre") {
+          child.properties = {
+            ...child.properties,
+            style: `
+              width: 100%; 
+              max-width: 100%; 
+              height: 400px; 
+              object-fit: cover;
+              border-radius: 20px;
+            `,
+          };
+        }
+      });
+
+      // Thêm các thuộc tính CSS chung cho đoạn văn bản
+      if (node.properties && node.properties.style) {
+        node.properties.style += `
+          font-family: 'Montserrat'; 
+          font-size: 1rem; 
+          font-weight: 400; 
+          display: -webkit-box; 
+          -webkit-line-clamp: 5; 
+          -webkit-box-orient: vertical; 
+          overflow: hidden;
+        `;
+      } else {
+        node.properties = {
+          style: `
+            font-family: 'Montserrat'; 
+            font-size: 1rem; 
+            font-weight: 400; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 5; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden;
+          `,
+        };
+      }
     }
   });
 };
 
-const rehypePlugins = [rehypeSanitize, removeParagraphTags, fixImages];
+const rehypePlugins = [rehypeSanitize, fixFormat, fixParagraphs];
 
 export default function MarkDown({ markdown }) {
   return (

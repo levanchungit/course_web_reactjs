@@ -70,7 +70,7 @@ function ItemDanhSachBaiViet(props) {
               fontFamily={"Montserrat"}
               fontWeight={"Regular"}
             >
-              Tags:{" "}
+              Thể loại:{" "}
             </Typography>
             {dataItem &&
               dataItem.category_names &&
@@ -103,13 +103,7 @@ function ItemDanhSachBaiViet(props) {
               })}
           </Stack>
 
-          <MarkDown
-            markdown={
-              dataItem.content.length > 400
-                ? dataItem.content.substring(0, 400) + "..."
-                : dataItem.content
-            }
-          />
+          <MarkDown markdown={dataItem.content} />
 
           {dataItem && dataItem.slug && (
             <Link
