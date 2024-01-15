@@ -1,11 +1,12 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Skeleton, Stack, Typography } from "@mui/material";
-import { formatDateTime } from "../../../../utils/common";
+import { Button, Stack, Typography } from "@mui/material";
+import { formatDateTime } from "../../../utils/common";
+import { Link } from "react-router-dom";
+import MarkDown from "./MarkDown";
 
-function ItemBaiViet(props) {
-  const [dataItem, setDataItem] = React.useState(props.dataItem);
-  const MAX_LENGTH_CONTENT = 443;
+function ItemDanhSachBaiViet(props) {
+  const [dataItem] = React.useState(props.dataItem);
 
   return (
     <React.Fragment>
@@ -22,8 +23,8 @@ function ItemBaiViet(props) {
           flexWrap={"wrap"}
           p={2.5}
           spacing={1.25}
-          alignItems={"center"}
-          justifyContent={"center"}
+          textAlign={"justify"}
+          borderBottom={"0.1px dashed  #A9A9AC"}
         >
           <Typography
             width={"100%"}
@@ -35,7 +36,7 @@ function ItemBaiViet(props) {
             opacity={0.8}
             textTransform={"uppercase"}
           >
-            {dataItem && dataItem.tittle ? dataItem.tittle : ""}
+            {dataItem && dataItem.title ? dataItem.title : ""}
           </Typography>
 
           <Stack direction={"row"} alignItems={"center"}>
@@ -66,11 +67,10 @@ function ItemBaiViet(props) {
           >
             <Typography
               fontSize={12}
-              fontSize={12}
               fontFamily={"Montserrat"}
               fontWeight={"Regular"}
             >
-              Tags:{" "}
+              Thể loại:{" "}
             </Typography>
             {dataItem &&
               dataItem.category_names &&
@@ -94,6 +94,7 @@ function ItemBaiViet(props) {
                       fontWeight={"Regular"}
                       key={index}
                       textTransform={"initial"}
+                      color="black"
                     >
                       {item}
                     </Typography>
@@ -102,54 +103,34 @@ function ItemBaiViet(props) {
               })}
           </Stack>
 
-          <img
-            src={dataItem && dataItem.cover_image ? dataItem.cover_image : ""}
-            alt="img"
-            //responsive style maxHeight="200px"
-            width={"100%"}
-            height={"200px"}
-            style={{
-              objectFit: "cover",
-              objectPosition: "center",
-              borderRadius: "8px",
-            }}
-          />
+          <MarkDown markdown={dataItem.content} />
 
-          <Typography
-            align="justify"
-            fontSize={16}
-            fontFamily={"Montserrat"}
-            fontWeight={"Regular"}
-            color={"#333"}
-            width={"100%"}
-          >
-            {/* limit paraphap  length 200 ... */}
-            {dataItem && dataItem.content
-              ? dataItem.content.length > MAX_LENGTH_CONTENT
-                ? dataItem.content.substr(0, MAX_LENGTH_CONTENT) + "..."
-                : dataItem.content
-              : ""}
-          </Typography>
-
-          <Button
-            sx={{
-              border: "0.1px solid" + "#A9A9AC",
-              color: "#000",
-              borderRadius: "8px",
-              textTransform: "capitalize",
-              fontSize: "16px",
-              fontFamily: "Montserrat",
-              fontWeight: "Regular",
-              width: "100%",
-            }}
-            variant="outlined"
-          >
-            Đọc thêm
-          </Button>
+          {dataItem && dataItem.slug && (
+            <Link
+              to={`/blog/${dataItem.slug}`}
+              state={{ chiTietBaiViet: dataItem }}
+            >
+              <Button
+                sx={{
+                  border: "0.1px solid" + "#A9A9AC",
+                  color: "#000",
+                  borderRadius: "8px",
+                  textTransform: "capitalize",
+                  fontSize: "16px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "Regular",
+                  width: "100%",
+                }}
+                variant="outlined"
+              >
+                Đọc thêm
+              </Button>
+            </Link>
+          )}
         </Stack>
       </Stack>
     </React.Fragment>
   );
 }
 
-export default ItemBaiViet;
+export default ItemDanhSachBaiViet;
