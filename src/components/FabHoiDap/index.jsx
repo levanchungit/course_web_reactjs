@@ -34,7 +34,6 @@ const withDialog = (WrappedComponent) => {
     const handleClose = () => {
       if (validateForm()) {
         setOpen(false);
-        console.log("INFO " + email + " " + content);
       }
     };
 

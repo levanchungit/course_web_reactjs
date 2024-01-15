@@ -7,7 +7,6 @@ import rehypeSanitize from "rehype-sanitize";
 const fixParagraphs = () => (tree) => {
   let newChildren = [];
   let foundFirstParagraph = false;
-  console.log(tree);
   tree.children.forEach((node) => {
     if (node.tagName === "p" && !foundFirstParagraph) {
       // Nếu là đoạn văn bản và chưa tìm thấy đoạn văn bản, thêm vào danh sách và đánh dấu đã tìm thấy

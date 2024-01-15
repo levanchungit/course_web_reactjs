@@ -21,7 +21,6 @@ function Blog() {
 
       if (response.status === 200) {
         const { total, page, limit } = response.data;
-        console.log("rs ", response.data.results);
         if (page === 1) {
           setDataBaiViet(response.data.results);
         } else {
@@ -42,10 +41,6 @@ function Blog() {
       setLoading(false);
     }
   };
-
-  console.log("dataBaiViet", dataBaiViet.length);
-  console.log("hasMoreData", hasMoreData);
-  console.log("currentPage", currentPage);
 
   const handleLoadMore = () => {
     if (hasMoreData) {

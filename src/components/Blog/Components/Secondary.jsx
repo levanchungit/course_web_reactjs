@@ -127,7 +127,6 @@ export default function Secondary() {
         const response = await tacGiaAPI.getAuthor();
         if (response.status === 200) {
           setDataTacGia(response.data.result);
-          console.log("response.result ", response.data.result);
         }
       } catch (e) {
         console.log("error: ", e);
@@ -139,7 +138,6 @@ export default function Secondary() {
         const response = await theLoaiAPI.getCategories();
         if (response.status === 200) {
           setDataDanhMuc(response.data.results);
-          console.log("response.result ", response.data.results);
         }
       } catch (e) {
         console.log("error: ", e);
@@ -151,7 +149,6 @@ export default function Secondary() {
         const response = await baiVietAPI.getPostsPopular();
         if (response.status === 200) {
           setDataBaiVietNoiBat(response.data.results);
-          console.log("response.result ", response.data.results);
         }
       } catch (e) {
         console.log("error: ", e);
