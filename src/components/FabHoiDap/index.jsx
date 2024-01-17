@@ -133,7 +133,7 @@ const FabHoiDap = ({ openDialog }) => {
         position: "fixed",
         m: 0,
         top: "auto",
-        right: 10,
+        right: 20,
         bottom: 60,
         left: "auto",
       }}

@@ -4,16 +4,11 @@ import { Stack, Typography, Link } from "@mui/material";
 import ButtonCustom from "../../../ButtonCustom";
 import { useMainValues } from "../../../../contexts/MainContext";
 
-export default function LoatBaiItem({
-  title,
-  category,
-  description,
-  btnText,
-  img,
-  href,
-}) {
+export default function LoatBaiItem({ item }) {
   const { isMediumScreen } = useMainValues();
-
+  const { title, description, cover_image } = item;
+  const { videoId, playlistId } = item.items[0];
+  console.log(`https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -43,7 +38,7 @@ export default function LoatBaiItem({
               color={"#D2302C"}
               textTransform={"uppercase"}
             >
-              {title}
+              Loạt bài
             </Typography>
             <Typography
               align="left"
@@ -53,7 +48,7 @@ export default function LoatBaiItem({
               color={"#D2302C"}
               textTransform={"uppercase"}
             >
-              {category}
+              {title}
             </Typography>
             <Typography
               align="justify"
@@ -65,7 +60,14 @@ export default function LoatBaiItem({
               {description}
             </Typography>
             <Stack alignItems={"flex-start"}>
-              <ButtonCustom btnText={btnText} />
+              <ButtonCustom
+                onClick={() =>
+                  window.open(
+                    `https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`
+                  )
+                }
+                btnText={"Xem toàn bộ loạt bài"}
+              />
             </Stack>
           </Stack>
 
@@ -75,9 +77,30 @@ export default function LoatBaiItem({
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Stack direction={"row"} p={isMediumScreen ? 0 : 2}>
-              <Link href={href}>
-                <img src={img} width="100%" height="auto" alt={category}></img>
+            <Stack
+              direction={"row"}
+              sx={{
+                width: "100%",
+                height: "auto",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <Link
+                target="_blank"
+                to={`https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`}
+              >
+                <img
+                  src={cover_image}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    borderRadius: 10,
+                  }}
+                  alt={title}
+                />
               </Link>
             </Stack>
           </Stack>

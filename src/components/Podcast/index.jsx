@@ -5,10 +5,28 @@ import LoatBaiItem from "./components/LoatBaiItem";
 import ButtonCustom from "../ButtonCustom";
 import { useMainValues } from "../../contexts/MainContext";
 import LoatBaiList from "./components/TapGanDayList";
+import courseAPI from "../../api/CourseAPI";
 // import getYoutubeVideos from "../../utils/youtubeApi";
 
 export default function Podcast() {
   const { isMediumScreen, youtubeData } = useMainValues();
+  const [dataLoatBai, setDataLoatBai] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchDataLoatBai = async () => {
+      try {
+        const response = await courseAPI.getCourses();
+        if (response.status === 200) {
+          setDataLoatBai(response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    fetchDataLoatBai();
+  }, []);
+
   return (
     <div className="App">
       {/* VIDEO MỚI NHẤT */}
@@ -104,20 +122,8 @@ export default function Podcast() {
         width={"100%"}
         borderTop={"0.1px solid #DDDDDD"}
       >
-        {LIST_LOAT_BAI.map((item, index) => {
-          return (
-            item.visible && (
-              <LoatBaiItem
-                key={item.id}
-                title={item.title}
-                category={item.category}
-                description={item.description}
-                btnText={item.btnText}
-                href={item.href}
-                img={item.img}
-              />
-            )
-          );
+        {dataLoatBai.map((item, index) => {
+          return <LoatBaiItem key={index} item={item} />;
         })}
       </Grid>
     </div>

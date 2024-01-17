@@ -1,4 +1,5 @@
-export const API_URL = "https://course-backend-alb3.onrender.com";
+// export const API_URL = "https://course-backend-alb3.onrender.com";
+export const API_URL = "http://192.168.1.220:3000";
 
 export const LOGO_URL =
   "https://res.cloudinary.com/ddfyyysdw/image/upload/v1699691756/mecuyywr3glssuknyqu0.png";
