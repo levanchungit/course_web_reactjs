@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Stack, Typography, Link } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import ButtonCustom from "../../../ButtonCustom";
 import { useMainValues } from "../../../../contexts/MainContext";
 
@@ -8,7 +8,6 @@ export default function LoatBaiItem({ item }) {
   const { isMediumScreen } = useMainValues();
   const { title, description, cover_image } = item;
   const { videoId, playlistId } = item.items[0];
-  console.log(`https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -86,9 +85,10 @@ export default function LoatBaiItem({ item }) {
                 position: "relative",
               }}
             >
-              <Link
+              <a
+                rel="noopener noreferrer"
+                href={`https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`}
                 target="_blank"
-                to={`https://www.youtube.com/watch?v=${videoId}&list=${playlistId}`}
               >
                 <img
                   src={cover_image}
@@ -101,7 +101,7 @@ export default function LoatBaiItem({ item }) {
                   }}
                   alt={title}
                 />
-              </Link>
+              </a>
             </Stack>
           </Stack>
         </Stack>
