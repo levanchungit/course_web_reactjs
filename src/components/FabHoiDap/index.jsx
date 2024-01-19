@@ -94,7 +94,6 @@ const withDialog = (WrappedComponent) => {
               fullWidth
               variant="standard"
               multiline
-              maxRows={5}
               length={100}
               error={contentError}
               helperText={

@@ -184,7 +184,6 @@ export default function BinhLuan() {
           label="Nhập bình luận của bạn"
           multiline
           rows={5}
-          maxRows={5}
         />
 
         <TextField label="Tên của bạn" />

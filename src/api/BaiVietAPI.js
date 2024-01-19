@@ -13,6 +13,10 @@ const baiVietAPI = {
       `${API_URL}/api/posts/popular?page=${page}&limit=${limit}&sort=${sort}`
     );
   },
+
+  async getPostBySlug(slug) {
+    return await axios.get(`${API_URL}/api/posts/slug/${slug}`);
+  },
 };
 
 export default baiVietAPI;
