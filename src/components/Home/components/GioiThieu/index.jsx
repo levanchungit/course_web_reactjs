@@ -1,12 +1,48 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Box, Link, Stack, Typography } from "@mui/material";
-import { FacebookOutlined, LinkedIn } from "@mui/icons-material/";
+import {
+  FacebookOutlined,
+  LinkedIn,
+  YouTube,
+  Instagram,
+} from "@mui/icons-material/";
 import { URL_INFO } from "../../../../constants/appConstants";
 import { useMainValues } from "../../../../contexts/MainContext";
+import tacGiaAPI from "../../../../api/TacGiaAPI";
 
 export default function GioiThieu(props) {
   const { isSmallScreen, isMediumScreen } = useMainValues();
+
+  const [dataTacGia, setDataTacGia] = React.useState({
+    email: "levanchung.webcourse@gmail.com",
+    author: {
+      instagram: "https://www.instagram.com/levanchung.it/",
+      linkedin: "https://www.linkedin.com/in/levanchung/",
+      youtube: "https://www.youtube.com/channel/UCCA0ty3anrudXp-PZ3gPIfQ",
+      avatar:
+        "https://res.cloudinary.com/ddfyyysdw/image/upload/v1704787052/dhwz4mji3zym0k2ncmjg.png",
+      facebook: "https://www.facebook.com/levanchung.it/",
+      introduction:
+        "Lorem ipsum dolor sit amet consectetur. Sed erat mattis eros suspendisse mauris sit. Eleifend risus pulvinar purus interdum cursus quam ullamcorper ultricies. Sit nulla sit tristique in sem adipiscing. Ante cursus massa nunc morbi nulla nunc duis.",
+      name: "Lê Văn Chung",
+    },
+  });
+
+  React.useEffect(() => {
+    const fetchDataAuthor = async () => {
+      try {
+        const response = await tacGiaAPI.getAuthor();
+        if (response.status === 200) {
+          setDataTacGia(response.data.result);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    fetchDataAuthor();
+  }, []);
 
   return (
     <React.Fragment>
@@ -54,11 +90,7 @@ export default function GioiThieu(props) {
               fontWeight={"Regular"}
               color={"#FFFF"}
             >
-              Trang web là nơi tập trung đa dạng nhiều nội dung. Mục tiêu áp
-              dụng và chia sẻ kiến thức, hy vọng nội dung mình mang lại nguồn
-              động viên và niềm vui tích cực cho mọi người trên hành trình phát
-              triển bản thân. Hãy cùng nhau lan toả năng lượng tích cực và khám
-              phá thế giới đa sắc mà trang web mang lại!
+              {dataTacGia.author.introduction}
             </Typography>
 
             <Stack
@@ -66,45 +98,100 @@ export default function GioiThieu(props) {
               spacing={2.5}
               justifyContent={"flex-start"}
             >
-              <Link href={URL_INFO.facebook} underline="none">
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  width={"52px"}
-                  height={"52px"}
-                  borderRadius={"50%"}
-                  p={"10px"}
-                  border={"2px solid #D2302C"}
+              {/* load object dataTacgia.author */}
+              {dataTacGia.author.facebook && (
+                <Link
+                  target="_blank"
+                  href={dataTacGia.author.facebook}
+                  underline="none"
                 >
-                  <FacebookOutlined
-                    sx={{
-                      width: "2rem",
-                      height: "2rem",
-                      color: "#D2302C",
-                    }}
-                  />
-                </Box>
-              </Link>
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    width={"52px"}
+                    height={"52px"}
+                    borderRadius={"50%"}
+                    p={"10px"}
+                    border={"2px solid #D2302C"}
+                  >
+                    <FacebookOutlined
+                      sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                    />
+                  </Box>
+                </Link>
+              )}
 
-              <Link href={URL_INFO.linkedin} underline="none">
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  width={"52px"}
-                  height={"52px"}
-                  borderRadius={"50%"}
-                  p={"10px"}
-                  border={"2px solid #D2302C"}
+              {dataTacGia.author.instagram && (
+                <Link
+                  target="_blank"
+                  href={dataTacGia.author.instagram}
+                  underline="none"
                 >
-                  <LinkedIn
-                    sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
-                  />
-                </Box>
-              </Link>
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    width={"52px"}
+                    height={"52px"}
+                    borderRadius={"50%"}
+                    p={"10px"}
+                    border={"2px solid #D2302C"}
+                  >
+                    <Instagram
+                      sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                    />
+                  </Box>
+                </Link>
+              )}
 
-              <Link href={URL_INFO.port_folio} underline="none">
+              {dataTacGia.author.youtube && (
+                <Link
+                  target="_blank"
+                  href={dataTacGia.author.youtube}
+                  underline="none"
+                >
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    width={"52px"}
+                    height={"52px"}
+                    borderRadius={"50%"}
+                    p={"10px"}
+                    border={"2px solid #D2302C"}
+                  >
+                    <YouTube
+                      sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                    />
+                  </Box>
+                </Link>
+              )}
+
+              {dataTacGia.author.linkedin && (
+                <Link
+                  target="_blank"
+                  href={dataTacGia.author.linkedin}
+                  underline="none"
+                >
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    width={"52px"}
+                    height={"52px"}
+                    borderRadius={"50%"}
+                    p={"10px"}
+                    border={"2px solid #D2302C"}
+                  >
+                    <LinkedIn
+                      sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                    />
+                  </Box>
+                </Link>
+              )}
+
+              <Link target="_blank" href={URL_INFO.port_folio} underline="none">
                 <Box
                   display={"flex"}
                   justifyContent={"center"}
