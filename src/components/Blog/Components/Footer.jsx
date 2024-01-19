@@ -19,6 +19,7 @@ export default function Footer() {
           fontSize={12}
           fontWeight={"Regular"}
           color={"#ffffff"}
+          textAlign={"center"}
         >
           Chân thành cảm ơn các bạn. Hi vọng các bạn sẽ tìm thấy nhiều chút năng
           lượng tích cực khi ở đây
