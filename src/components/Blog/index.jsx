@@ -6,6 +6,7 @@ import ItemDanhSachBaiViet from "./Components/ItemDanhSachBaiViet";
 import authAPI from "../../api/BaiVietAPI";
 import Secondary from "./Components/Secondary";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function Blog() {
   const { isMediumScreen } = useMainValues();
@@ -15,11 +16,17 @@ function Blog() {
   const [sortPost, setSortPost] = useState("desc");
   const [loading, setLoading] = React.useState(false);
   const [hasMoreData, setHasMoreData] = React.useState(true);
+  const [searchKey, setSearchKey] = useState("");
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await authAPI.getPosts(currentPage, limitPost, sortPost);
+      const response = await authAPI.getPosts(
+        currentPage,
+        limitPost,
+        sortPost,
+        searchKey
+      );
 
       if (response.status === 200) {
         const { total, page, limit } = response.data;
@@ -155,7 +162,11 @@ function Blog() {
           </Stack>
 
           {/* SECONDARY */}
-          <Secondary />
+          <Secondary
+            fetchData={fetchData}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+          />
         </Stack>
       </Stack>
       {/* Chừa khoảng cách footer */}
