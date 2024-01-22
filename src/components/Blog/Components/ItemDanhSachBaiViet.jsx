@@ -73,8 +73,8 @@ function ItemDanhSachBaiViet(props) {
               Thể loại:{" "}
             </Typography>
             {dataItem &&
-              dataItem.category_names &&
-              dataItem.category_names.map((item, index) => {
+              dataItem.categories &&
+              dataItem.categories.map((item, index) => {
                 return (
                   <Button
                     key={index}
@@ -96,7 +96,7 @@ function ItemDanhSachBaiViet(props) {
                       textTransform={"initial"}
                       color="black"
                     >
-                      {item}
+                      {item.name}
                     </Typography>
                   </Button>
                 );
@@ -106,7 +106,7 @@ function ItemDanhSachBaiViet(props) {
           <MarkDown markdown={dataItem && dataItem.content} type={"item"} />
 
           {dataItem && dataItem.slug && (
-            <Link to={`/blog/${dataItem.slug}`} state={{ slug: dataItem.slug }}>
+            <Link to={`/blog/${dataItem.slug}`}>
               <Button
                 sx={{
                   border: "0.1px solid" + "#A9A9AC",

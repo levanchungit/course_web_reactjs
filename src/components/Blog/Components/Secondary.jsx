@@ -20,6 +20,7 @@ import tacGiaAPI from "../../../api/TacGiaAPI";
 import theLoaiAPI from "../../../api/TheLoaiAPI";
 import baiVietAPI from "../../../api/BaiVietAPI";
 import { Link } from "react-router-dom";
+import { formatDateTime } from "../../../utils/common";
 
 export default function Secondary({ fetchData, searchKey, setSearchKey }) {
   const { isMediumScreen } = useMainValues();
@@ -40,24 +41,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
 
   const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
 
-  const [dataHoatDong, setDataHoatDong] = React.useState([
-    {
-      _id: 1,
-      title: "Tin tức",
-      content: "Tin tức 1",
-      tacgia: "Nguyễn Văn A",
-      thoigian: "10/10/2021",
-      imgUrl: "https://picsum.photos/200/300",
-    },
-    {
-      _id: 2,
-      title: "Sự kiện",
-      content: "Sự kiện 1",
-      tacgia: "Nguyễn Văn A",
-      thoigian: "10/10/2021",
-      imgUrl: "https://picsum.photos/200/300",
-    },
-  ]);
+  const [dataHoatDong, setDataHoatDong] = React.useState([]);
 
   const [dataDanhMuc, setDataDanhMuc] = React.useState([]);
 
@@ -95,9 +79,21 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
       }
     };
 
+    const fetchDataRecentActivity = async () => {
+      try {
+        const response = await baiVietAPI.getRecentActivity();
+        if (response.status === 200) {
+          setDataHoatDong(response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
     fetchDataAuthor();
     fetchDataCategories();
     fetchDataPostsPopular();
+    fetchDataRecentActivity();
   }, []);
 
   return (
@@ -166,7 +162,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
         </Stack>
 
         <Input
-          fullWidth={true}
+          fullWidth
           placeholder="Nhập từ khoá"
           sx={{
             p: 1,
@@ -433,23 +429,6 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
                   >
                     <Stack
                       direction={"column"}
-                      justifyContent={"center"}
-                      alignItems={"center"}
-                      borderRadius={"50%"}
-                      overflow={"hidden"}
-                    >
-                      {item.imgUrl ? (
-                        <img
-                          src={item.imgUrl}
-                          alt={item.title}
-                          width={60}
-                          height={60}
-                        />
-                      ) : null}
-                    </Stack>
-
-                    <Stack
-                      direction={"column"}
                       flex={1}
                       padding={1}
                       marginLeft={1}
@@ -463,16 +442,16 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
                         <Typography
                           fontSize={12}
                           fontFamily={"Montserrat"}
-                          fontStyle={"Regular"}
+                          fontWeight={"Bold"}
                         >
-                          {item.tacgia}
+                          {item.name}
                         </Typography>
                         <Typography
                           fontSize={12}
                           fontFamily={"Montserrat"}
-                          fontStyle={"Regular"}
+                          fontWeight={"Regular"}
                         >
-                          {item.thoigian}
+                          {formatDateTime(item.create_at)}
                         </Typography>
                       </Stack>
 
@@ -480,15 +459,15 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
                         <Typography
                           fontSize={12}
                           fontFamily={"Montserrat"}
-                          fontStyle={"Regular"}
+                          fontWeight={"Regular"}
                         >
-                          {item.title}
+                          {item.postId?.title ? item.postId.title : ""}
                         </Typography>
 
                         <Typography
                           fontSize={12}
                           fontFamily={"Montserrat"}
-                          fontStyle={"Regular"}
+                          fontWeight={"Regular"}
                           color={"#999"}
                         >
                           {item.content}
