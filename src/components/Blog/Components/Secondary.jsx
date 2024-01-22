@@ -3,6 +3,7 @@ import {
   Button,
   FormControl,
   IconButton,
+  Input,
   InputAdornment,
   InputLabel,
   OutlinedInput,
@@ -18,8 +19,9 @@ import { Search } from "@mui/icons-material";
 import tacGiaAPI from "../../../api/TacGiaAPI";
 import theLoaiAPI from "../../../api/TheLoaiAPI";
 import baiVietAPI from "../../../api/BaiVietAPI";
+import { Link } from "react-router-dom";
 
-export default function Secondary() {
+export default function Secondary({ fetchData, searchKey, setSearchKey }) {
   const { isMediumScreen } = useMainValues();
   const [dataTacGia, setDataTacGia] = React.useState({
     email: "levanchung.webcourse@gmail.com",
@@ -35,16 +37,9 @@ export default function Secondary() {
       name: "Lê Văn Chung",
     },
   });
-  const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([
-    {
-      _id: 1,
-      title: "Bài viết nổi bật 1",
-    },
-    {
-      _id: 2,
-      title: "Bài viết nổi bật 2",
-    },
-  ]);
+
+  const [dataBaiVietNoiBat, setDataBaiVietNoiBat] = React.useState([]);
+
   const [dataHoatDong, setDataHoatDong] = React.useState([
     {
       _id: 1,
@@ -63,63 +58,8 @@ export default function Secondary() {
       imgUrl: "https://picsum.photos/200/300",
     },
   ]);
-  const [dataDanhMuc, setDataDanhMuc] = React.useState([]);
-  const data = [
-    {
-      _id: 1,
-      title: "Tin tức",
-      lst_content: [
-        {
-          _id: 11,
-          content: "Tin tức 1",
-        },
-        {
-          _id: 12,
-          content: "Tin tức 2",
-        },
-        {
-          _id: 13,
-          content: "Tin tức 3",
-        },
-      ],
-    },
-    {
-      _id: 2,
-      title: "Sự kiện",
-      lst_content: [
-        {
-          _id: 21,
-          content: "Sự kiện 1",
-        },
-        {
-          _id: 22,
-          content: "Sự kiện 2",
-        },
-        {
-          _id: 23,
-          content: "Sự kiện 3",
-        },
-      ],
-    },
-  ];
 
-  const data1 = [
-    {
-      _id: 11,
-      content:
-        "Tin tức 1 lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum?",
-    },
-    {
-      _id: 12,
-      content:
-        "Tin tức 2 lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum?",
-    },
-    {
-      _id: 13,
-      content:
-        "Tin tức 3 lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptatum?",
-    },
-  ];
+  const [dataDanhMuc, setDataDanhMuc] = React.useState([]);
 
   React.useEffect(() => {
     const fetchDataAuthor = async () => {
@@ -205,30 +145,74 @@ export default function Secondary() {
       </Stack>
 
       {/* INPUT SEARCH */}
-      <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-        <InputLabel>{"Search"}</InputLabel>
-        <OutlinedInput
-          type={"text"}
-          sx={{ borderRadius: "8px" }}
+      <Stack
+        width={"100%"}
+        spacing={2}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <Stack width={"100%"} borderLeft={2 / 8 + "rem solid #000"}>
+          <Typography
+            p={"10px"}
+            fontSize={12}
+            fontFamily={"Montserrat"}
+            fontStyle={"Regular"}
+            textTransform={"uppercase"}
+            textAlign={"center"}
+          >
+            Tìm kiếm
+          </Typography>
+        </Stack>
+
+        <Input
+          fullWidth={true}
+          placeholder="Nhập từ khoá"
+          sx={{
+            p: 1,
+            borderRadius: "8px",
+            fontWeight: "Regular",
+            fontSize: 12,
+            fontFamily: "Montserrat",
+            "&:before": {
+              borderBottom: "0.1px dashed #A9A9AC",
+            },
+            "&:after": {
+              borderBottom: "0.1px dashed #A9A9AC",
+            },
+            "&:hover:before": {
+              borderBottom: "0.1px dashed #A9A9AC",
+            },
+            "&:hover:after": {
+              borderBottom: "0.1px dashed #A9A9AC",
+            },
+            "&:hover:not(.Mui-disabled):before": {
+              borderBottom: "0.1px dashed #A9A9AC",
+            },
+          }}
+          value={searchKey}
+          onChange={(e) => {
+            setSearchKey(e.target.value);
+          }}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              fetchData();
+            }
+          }}
           endAdornment={
-            <InputAdornment position={"end"}>
+            <InputAdornment position="end">
               <IconButton
-                sx={{ color: "black" }}
                 onClick={() => {
-                  console.log("Clicked");
+                  fetchData();
                 }}
-                onMouseDown={() => {
-                  console.log("onMouseDown");
-                }}
-                edge={"end"}
+                edge="end"
               >
                 <Search />
               </IconButton>
             </InputAdornment>
           }
-          label={"Search"}
         />
-      </FormControl>
+      </Stack>
 
       {/* GIỚI THIỆU */}
       <Stack
@@ -244,6 +228,7 @@ export default function Secondary() {
             fontFamily={"Montserrat"}
             fontStyle={"Regular"}
             textTransform={"uppercase"}
+            textAlign={"center"}
           >
             Giới thiệu
           </Typography>
@@ -251,7 +236,6 @@ export default function Secondary() {
         <img
           src={dataTacGia.author.avatar}
           alt={dataTacGia.author.title}
-          // width={isMediumScreen ? "40%" : "100%"}
           height="auto"
           style={{
             maxWidth: "100%",
@@ -301,30 +285,35 @@ export default function Secondary() {
           {dataBaiVietNoiBat
             ? dataBaiVietNoiBat.map((item, index) => {
                 return (
-                  <Typography
-                    overflow={"hidden"}
+                  <Link
                     key={index}
-                    align="justify"
-                    fontSize={12}
-                    fontFamily={"Montserrat"}
-                    fontStyle={"Regular"}
-                    onClick={() => {
-                      alert("Chức năng này đang được phát triển");
+                    style={{
+                      textDecoration: "none",
                     }}
-                    sx={{
-                      cursor: "pointer",
-                      width: "100%",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      // hover under
-                      "&:hover": {
-                        textDecoration: "underline",
-                      },
-                    }}
+                    to={`/blog/${item.slug}`}
+                    state={{ slug: item.slug }}
                   >
-                    &#8226; {item.title}
-                  </Typography>
+                    <Typography
+                      overflow={"hidden"}
+                      align="justify"
+                      fontSize={12}
+                      fontFamily={"Montserrat"}
+                      fontStyle={"Regular"}
+                      sx={{
+                        cursor: "pointer",
+                        width: "100%",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        color: "#000",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      &#8226; {item.title}
+                    </Typography>
+                  </Link>
                 );
               })
             : null}
@@ -375,6 +364,10 @@ export default function Secondary() {
                       color: "#ddd",
                       px: 0.5,
                       py: 0.25,
+                    }}
+                    onClick={() => {
+                      setSearchKey(item.name);
+                      fetchData();
                     }}
                   >
                     <Typography

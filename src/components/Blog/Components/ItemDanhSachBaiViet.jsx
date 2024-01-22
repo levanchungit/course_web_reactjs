@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import { Link } from "react-router-dom";
 import MarkDown from "./MarkDown";
@@ -103,13 +103,10 @@ function ItemDanhSachBaiViet(props) {
               })}
           </Stack>
 
-          <MarkDown markdown={dataItem.content} />
+          <MarkDown markdown={dataItem && dataItem.content} type={"item"} />
 
           {dataItem && dataItem.slug && (
-            <Link
-              to={`/blog/${dataItem.slug}`}
-              state={{ chiTietBaiViet: dataItem }}
-            >
+            <Link to={`/blog/${dataItem.slug}`} state={{ slug: dataItem.slug }}>
               <Button
                 sx={{
                   border: "0.1px solid" + "#A9A9AC",

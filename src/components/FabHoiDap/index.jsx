@@ -94,7 +94,6 @@ const withDialog = (WrappedComponent) => {
               fullWidth
               variant="standard"
               multiline
-              maxRows={5}
               length={100}
               error={contentError}
               helperText={
@@ -133,7 +132,7 @@ const FabHoiDap = ({ openDialog }) => {
         position: "fixed",
         m: 0,
         top: "auto",
-        right: 10,
+        right: 20,
         bottom: 60,
         left: "auto",
       }}

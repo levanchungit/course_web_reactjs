@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import MarkDown from "./MarkDown";
-import { Link } from "react-router-dom";
 
 export default function NoiDungBaiViet({ content }) {
   return (
@@ -89,7 +88,7 @@ export default function NoiDungBaiViet({ content }) {
             })}
           </Stack>
 
-          <MarkDown markdown={content?.content} />
+          <MarkDown markdown={content?.content} type={"content"} />
         </Stack>
       </Stack>
     </React.Fragment>
