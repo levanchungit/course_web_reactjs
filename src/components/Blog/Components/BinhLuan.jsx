@@ -72,7 +72,7 @@ export default function BinhLuan({ slug, comments }) {
                   {formatDateTime(item.create_at)} &nbsp;
                 </Typography>
 
-                <Button variant="text">
+                {/* <Button variant="text">
                   <Typography
                     align="left"
                     fontSize={14}
@@ -82,7 +82,7 @@ export default function BinhLuan({ slug, comments }) {
                   >
                     - Trả lời
                   </Typography>
-                </Button>
+                </Button> */}
               </Stack>
 
               <Typography
@@ -185,9 +185,7 @@ export default function BinhLuan({ slug, comments }) {
 
     try {
       const response = await baiVietAPI.createComment(data);
-      console.log("response ", response);
       if (response.status === 201) {
-        // refresh page
         alert("Gửi bình luận thành công");
       } else {
         alert("Đã xảy ra lỗi vui lòng thử lại");

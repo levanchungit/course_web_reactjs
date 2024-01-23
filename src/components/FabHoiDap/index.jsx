@@ -77,7 +77,10 @@ const withDialog = (WrappedComponent) => {
           alert("Gửi thất bại, vui lòng thử lại sau");
         }
       } catch (err) {
-        setRecaptchaError("Vui lòng xác nhận reCAPTCHA");
+        console.log(err);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+      } finally {
+        captchaRef.current.reset();
       }
     };
 
@@ -123,12 +126,12 @@ const withDialog = (WrappedComponent) => {
           {...props}
         />
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Hi 👋!</DialogTitle>
+          <DialogTitle>Xin chào 👋!</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Nếu có bất kỳ câu hỏi, thắc mắc về bất cứ vấn đề hi vọng🌟 bạn sẽ
               đóng góp để Chung ngày càng hoàn thiện hơn nữa nhé🔥.<br></br>{" "}
-              Trân trọng cảm ơn, biết ơn 😇🍀. Chúc bạn có một ngày tốt lành🐧
+              Trân trọng cảm ơn, biết ơn 😇. Chúc bạn có một ngày tốt lành🐧
             </DialogContentText>
 
             <CustomTextField

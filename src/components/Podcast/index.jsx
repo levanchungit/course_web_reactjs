@@ -6,11 +6,13 @@ import ButtonCustom from "../ButtonCustom";
 import { useMainValues } from "../../contexts/MainContext";
 import LoatBaiList from "./components/TapGanDayList";
 import courseAPI from "../../api/CourseAPI";
+import podcastAPI from "../../api/PodcastAPI";
 // import getYoutubeVideos from "../../utils/youtubeApi";
 
 export default function Podcast() {
-  const { isMediumScreen, youtubeData } = useMainValues();
+  const { isMediumScreen } = useMainValues();
   const [dataLoatBai, setDataLoatBai] = React.useState([]);
+  const [dataVideos, setDataVideos] = React.useState([]);
 
   React.useEffect(() => {
     const fetchDataLoatBai = async () => {
@@ -24,7 +26,19 @@ export default function Podcast() {
       }
     };
 
+    const fetchDataVideos = async () => {
+      try {
+        const response = await podcastAPI.getVideos(1, 10, "desc");
+        if (response.status === 200) {
+          setDataVideos(response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
     fetchDataLoatBai();
+    fetchDataVideos();
   }, []);
 
   return (
@@ -56,7 +70,7 @@ export default function Podcast() {
             </Typography>
           </Grid>
 
-          <Grid item width={isMediumScreen ? "100%" : "50%"}>
+          <Grid item width={isMediumScreen ? "100%" : "40%"}>
             <div
               style={{
                 position: "relative",
@@ -64,7 +78,7 @@ export default function Podcast() {
                 height: 0,
               }}
             >
-              {youtubeData && youtubeData.length > 0 && (
+              {dataVideos && dataVideos.length > 0 && (
                 <iframe
                   style={{
                     position: "absolute",
@@ -74,7 +88,7 @@ export default function Podcast() {
                     height: "100%",
                     borderRadius: "20px",
                   }}
-                  src={`https://www.youtube.com/embed/${youtubeData[0].id.videoId}}`}
+                  src={`https://www.youtube.com/embed/${dataVideos[0].videoId}`}
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -92,10 +106,14 @@ export default function Podcast() {
         justifyContent="center"
         alignItems="center"
         borderTop={"0.1px solid #DDDDDD"}
-        spacing={2.5}
-        p={2.5}
       >
-        <Stack alignItems={"center"}>
+        <Stack
+          p={2.5}
+          width={isMediumScreen ? "100%" : "60%"}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Typography
             align="center"
             fontSize={24}
@@ -106,7 +124,7 @@ export default function Podcast() {
             CÁC TẬP GẦN ĐÂY
           </Typography>
 
-          <LoatBaiList />
+          <LoatBaiList dataVideos={dataVideos} />
         </Stack>
       </Stack>
       <Stack alignItems={"center"} mb={2.5}>
