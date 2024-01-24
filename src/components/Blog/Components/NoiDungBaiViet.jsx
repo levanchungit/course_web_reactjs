@@ -90,30 +90,16 @@ export default function NoiDungBaiViet({ slug, content }) {
 
           <MarkDown markdown={content?.content} type={"content"} />
 
+          {/* <!-- Your like button code --> */}
           <div
-            className="fb-like"
+            class="fb-like"
             data-href={`https://www.levanchung.tech/blog/${slug}`}
-            data-width=""
-            data-layout="button_count"
-            data-action="like"
-            data-size="small"
+            data-width="500"
+            data-layout=""
+            data-action=""
+            data-size=""
             data-share="true"
           ></div>
-          {/* 
-          <iframe
-            title="Facebook Like Button"
-            src={`https://www.facebook.com/plugins/like.php?href=http%3A%2F%2F192.168.1.220%3A3000%2Fblog%2F${slug}&width=100&layout&action&size&share=true&height=35&appId=${process.env.REACT_APP_APPID_FB}`}
-            width="100"
-            height="35"
-            style={{
-              width: "100%",
-              border: "none",
-              overflow: "hidden",
-              frameborder: "0",
-            }}
-            scrolling="no"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          ></iframe> */}
         </Stack>
       </Stack>
     </React.Fragment>
