@@ -191,8 +191,6 @@ export default function GioiThieu(props) {
                 </Link>
               )}
 
-              {console.log(dataTacGia.author)}
-
               {dataTacGia.author.portfolio && (
                 <Link
                   target="_blank"
