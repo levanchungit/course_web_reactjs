@@ -65,7 +65,7 @@ function Header(props) {
                 justifyContent: isMediumScreen ? "space-between" : "flex-start",
               }}
             >
-              <Link href="#" underline="none">
+              <Link href="/" underline="none">
                 <img
                   src={LOGO_URL}
                   width={"150px"}

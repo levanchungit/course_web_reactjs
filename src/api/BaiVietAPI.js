@@ -17,6 +17,14 @@ const baiVietAPI = {
   async getPostBySlug(slug) {
     return await axios.get(`${API_URL}/api/posts/slug/${slug}`);
   },
+
+  async createComment(data) {
+    return await axios.post(`${API_URL}/api/comments`,data);
+  },
+
+  async getRecentActivity() {
+    return await axios.get(`${API_URL}/api/posts/recentActivity`);
+  },
 };
 
 export default baiVietAPI;

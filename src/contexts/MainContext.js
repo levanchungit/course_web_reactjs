@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { useMediaQuery } from "@mui/material";
-import getYoutubeVideos from "../utils/youtubeApi";
+import courseAPI from "../api/CourseAPI";
+import podcastAPI from "../api/PodcastAPI";
 
 const MainContext = createContext();
 
@@ -11,37 +12,44 @@ export const MainProvider = ({ children }) => {
   const isLargeScreen = useMediaQuery("(max-width:1535px)"); // lg, large: 1200px
   const isExtraLargeScreen = useMediaQuery("(min-width:1536px)"); // xl, extra-large: 1536px
 
-  const [youtubeData, setYoutubeData] = useState(() => {
-    const cachedData = localStorage.getItem("cachedData");
-    return cachedData ? JSON.parse(cachedData) : [];
-  });
+  const [dataLoatBai, setDataLoatBai] = React.useState([]);
+  const [dataVideos, setDataVideos] = React.useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  React.useEffect(() => {
+    const fetchDataLoatBai = async () => {
       try {
-        const cachedData = localStorage.getItem("cachedData");
-        if (cachedData) {
-          setYoutubeData(JSON.parse(cachedData));
-        } else {
-          const data = await getYoutubeVideos(10);
-          setYoutubeData(data);
-          localStorage.setItem("cachedData", JSON.stringify(data));
+        const response = await courseAPI.getCourses();
+        if (response.status === 200) {
+          setDataLoatBai(response.data.results);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (e) {
+        console.log("error: ", e);
       }
     };
 
-    fetchData();
+    const fetchDataVideos = async () => {
+      try {
+        const response = await podcastAPI.getVideos(1, 10, "desc");
+        if (response.status === 200) {
+          setDataVideos(response.data.results);
+        }
+      } catch (e) {
+        console.log("error: ", e);
+      }
+    };
+
+    fetchDataLoatBai();
+    fetchDataVideos();
   }, []);
 
   const values = {
+    dataLoatBai,
+    dataVideos,
     isExtraSmallScreen,
     isSmallScreen,
     isMediumScreen,
     isLargeScreen,
     isExtraLargeScreen,
-    youtubeData,
   };
 
   return <MainContext.Provider value={values}>{children}</MainContext.Provider>;

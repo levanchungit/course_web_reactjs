@@ -9,17 +9,18 @@ import { useEffect } from "react";
 import baiVietAPI from "../../../api/BaiVietAPI";
 
 function ChiTietBaiViet() {
-  let { state } = useLocation();
+  const { pathname } = useLocation();
+  const slug = pathname.split("/blog/")[1];
+
   const { isMediumScreen } = useMainValues();
   const [dataChiTiet, setDataChiTiet] = React.useState();
 
   useEffect(() => {
     const fetchDataChiTietBaiVietSlug = async () => {
       try {
-        const response = await baiVietAPI.getPostBySlug(state.slug);
+        const response = await baiVietAPI.getPostBySlug(slug);
         if (response.status === 200) {
           setDataChiTiet(response.data.result);
-          console.log(response.data.result);
         }
       } catch (e) {
         console.log("error: ", e);
@@ -33,7 +34,6 @@ function ChiTietBaiViet() {
     <div className="App">
       <Stack
         width={"100%"}
-        s
         direction={"row"}
         justifyContent={"center"}
         backgroundColor={"#fff"}
@@ -51,10 +51,8 @@ function ChiTietBaiViet() {
             alignItems={"center"}
           >
             <NoiDungBaiViet content={dataChiTiet} />
-            <BinhLuan />
+            <BinhLuan slug={slug} comments={dataChiTiet?.comments} />
           </Stack>
-
-          {/* Secondary */}
           <Secondary />
         </Stack>
       </Stack>

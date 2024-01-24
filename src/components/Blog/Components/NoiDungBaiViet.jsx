@@ -60,7 +60,7 @@ export default function NoiDungBaiViet({ content }) {
             >
               Tags:
             </Typography>
-            {content?.category_names?.map((item, index) => {
+            {content?.categories?.map((item, index) => {
               return (
                 <Button
                   key={index}
@@ -81,7 +81,7 @@ export default function NoiDungBaiViet({ content }) {
                     textTransform={"initial"}
                     color="black"
                   >
-                    {item}
+                    {item.name}
                   </Typography>
                 </Button>
               );

@@ -7,7 +7,8 @@ import { useMainValues } from "../../../../contexts/MainContext";
 
 function Welcome(props) {
   const navigate = useNavigate();
-  const { isSmallScreen, youtubeData } = useMainValues();
+  const { isSmallScreen, dataVideos } = useMainValues();
+  
   return (
     <React.Fragment>
       <CssBaseline />
@@ -60,7 +61,7 @@ function Welcome(props) {
                   height: 0,
                 }}
               >
-                {youtubeData.length > 0 && (
+                {dataVideos && dataVideos.length > 0 && (
                   <iframe
                     style={{
                       position: "absolute",
@@ -70,8 +71,8 @@ function Welcome(props) {
                       height: "100%",
                       borderRadius: "20px",
                     }}
-                    src={`https://www.youtube.com/embed/${youtubeData[0].id.videoId}`}
-                    title={youtubeData[0].snippet.title}
+                    src={`https://www.youtube.com/embed/${dataVideos[0].videoId}`}
+                    title={dataVideos[0].title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen

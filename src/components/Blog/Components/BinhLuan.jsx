@@ -1,33 +1,31 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Stack, Typography, Link, TextField } from "@mui/material";
+import { Stack, Typography, TextField } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
+import baiVietAPI from "../../../api/BaiVietAPI";
+import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { formatDateTime } from "../../../utils/common";
 
-export default function BinhLuan() {
-  const [listComment, setListComment] = React.useState([]);
+export default function BinhLuan({ slug, comments }) {
+  const [captchaValue, setCaptchaValue] = useState("");
+  const [validateForm, setValidateForm] = useState({
+    content: false,
+    name: false,
+    email: false,
+    helperTextContent: "",
+    helperTextName: "",
+    helperTextEmail: "",
+  });
 
-  React.useEffect(() => {
-    const listDemo = [
-      {
-        _id: "1",
-        username: "Nguyễn Văn A",
-        dateComment: "15/10/2021",
-        content:
-          "Lorem ipsum dolor sit amet consectetur. Tortor nunc varius neque nunc amet velit ipsum. Praesent faucibus vitae amet praesent diam. Aliquam ut ultricies neque sit nisi aliquet integer arcu ipsum. In eu vestibulum pellentesque urna dolor hac convallis. Ultrices hac neque lacus nec venenatis lacus molestie. Et maecenas lobortis vulputate vitae lectus felis congue. Mauris nulla non eget sem felis congue vitae arcu. In at proin gravida dictum bibendum id semper. Auctor quis pulvinar morbi pharetra elementum eget urna. Ullamcorper nibh pellentesque nec odio pellentesque. Facilisis feugiat turpis felis nec semper. Sit at vel purus et id vel tortor at. Eu ut pellentesque sed praesent sed. Quam purus ornare suspendisse eros nullam aliquet id adipiscing urna. Porttitor mauris id accumsan aliquet vulputate dolor. Amet massa urna sed lectus in. Vivamus at faucibus risus tempor potenti volutpat. Dui sagittis lacus amet aliquam purus consequat consectetur. Sit ipsum gravida tempus nibh non. Aliquam ipsum turpis accumsan ultrices sapien libero sed. Quis egestas gravida mi sit vitae viverra. Et porta massa in nisl eleifend scelerisque mattis. Pharetra aliquet ut feugiat hendrerit nisi. Arcu dignissim cursus enim egestas urna nibh id eget senectus. Pretium a massa tincidunt ultrices. Id lacinia arcu nulla egestas nunc diam sit magna enim. Vel donec eget at vitae parturient placerat imperdiet vehicula morbi. Feugiat ac sagittis diam nisi risus at rhoncus iaculis. Ut in pretium tortor lorem.",
-        like: 10,
-      },
-      {
-        _id: "2",
-        username: "Nguyễn Văn B",
-        dateComment: "15/10/2021",
-        content:
-          "Lorem ipsum dolor sit amet consectetur. Tortor nunc varius neque nunc amet velit ipsum. Praesent faucibus vitae amet praesent diam. Aliquam ut ultricies neque sit nisi aliquet integer arcu ipsum. In eu vestibulum pellentesque urna dolor hac convallis. Ultrices hac neque lacus nec venenatis lacus molestie. Et maecenas lobortis vulputate vitae lectus felis congue. Mauris nulla non eget sem felis congue vitae arcu. In at proin gravida dictum bibendum id semper. Auctor quis pulvinar morbi pharetra elementum eget urna. Ullamcorper nibh pellentesque nec odio pellentesque. Facilisis feugiat turpis felis nec semper. Sit at vel purus et id vel tortor at. Eu ut pellentesque sed praesent sed. Quam purus ornare suspendisse eros nullam aliquet id adipiscing urna. Porttitor mauris id accumsan aliquet vulputate dolor. Amet massa urna sed lectus in. Vivamus at faucibus risus tempor potenti volutpat. Dui sagittis lacus amet aliquam purus consequat consectetur. Sit ipsum gravida tempus nibh non. Aliquam ipsum turpis accumsan ultrices sapien libero sed. Quis egestas gravida mi sit vitae viverra. Et porta massa in nisl eleifend scelerisque mattis. Pharetra aliquet ut feugiat hendrerit nisi. Arcu dignissim cursus enim egestas urna nibh id eget senectus. Pretium a massa tincidunt ultrices. Id lacinia arcu nulla egestas nunc diam sit magna enim. Vel donec eget at vitae parturient placerat imperdiet vehicula morbi. Feugiat ac sagittis diam nisi risus at rhoncus iaculis. Ut in pretium tortor lorem.",
-        like: 10,
-      },
-    ];
-    setListComment(listDemo);
-  }, []);
+  const [dataComment, setDataComment] = useState({
+    slug: "",
+    name: "",
+    email: "",
+    content: "",
+    type: "comment",
+  });
 
   const CommentItem = ({ item }) => {
     return (
@@ -56,7 +54,7 @@ export default function BinhLuan() {
                 fontWeight={"Bold"}
                 color={"#333"}
               >
-                {item.username}
+                {item.name}
               </Typography>
 
               <Stack
@@ -71,10 +69,10 @@ export default function BinhLuan() {
                   fontWeight={"Bold"}
                   color={"#333"}
                 >
-                  {item.dateComment} &nbsp;
+                  {formatDateTime(item.create_at)} &nbsp;
                 </Typography>
 
-                <Link underline={"none"} href={"#"} target={"_blank"}>
+                {/* <Button variant="text">
                   <Typography
                     align="left"
                     fontSize={14}
@@ -84,7 +82,7 @@ export default function BinhLuan() {
                   >
                     - Trả lời
                   </Typography>
-                </Link>
+                </Button> */}
               </Stack>
 
               <Typography
@@ -122,6 +120,82 @@ export default function BinhLuan() {
     );
   };
 
+  const validate = (email, content, name) => {
+    let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    // Kiểm tra rỗng
+    if (!email.trim() || !content.trim() || !name.trim()) {
+      setValidateForm({
+        content: !content.trim(),
+        name: !name.trim(),
+        email: !email.trim(),
+        helperTextContent: content.trim() ? "" : "Vui lòng nhập nội dung",
+        helperTextName: name.trim() ? "" : "Vui lòng nhập tên của bạn",
+        helperTextEmail: email.trim() ? "" : "Vui lòng nhập email của bạn",
+      });
+      return false;
+    }
+
+    // Kiểm tra định dạng email
+    if (!emailRegex.test(email)) {
+      setValidateForm({
+        content: false,
+        name: false,
+        email: true,
+        helperTextEmail: "Email không hợp lệ",
+      });
+      return false;
+    }
+
+    if (!captchaValue) {
+      alert("Vui lòng xác nhận captcha");
+      return false;
+    }
+
+    // Nếu không có lỗi
+    setValidateForm({
+      content: false,
+      name: false,
+      email: false,
+      helperTextContent: "",
+      helperTextName: "",
+      helperTextEmail: "",
+    });
+
+    return true;
+  };
+
+  const handleComment = async () => {
+    const isValid = validate(
+      dataComment.email,
+      dataComment.content,
+      dataComment.name
+    );
+
+    if (!isValid) return;
+
+    const data = {
+      tokenCaptcha: captchaValue,
+      name: dataComment.name,
+      slug: slug,
+      email: dataComment.email,
+      content: dataComment.content,
+      type: dataComment.type,
+    };
+
+    try {
+      const response = await baiVietAPI.createComment(data);
+      if (response.status === 201) {
+        alert("Gửi bình luận thành công");
+      } else {
+        alert("Đã xảy ra lỗi vui lòng thử lại");
+      }
+    } catch (e) {
+      console.log("errors ", e);
+      alert("Đã xảy ra lỗi vui lòng thử lại");
+    }
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -140,15 +214,16 @@ export default function BinhLuan() {
           color={"#000"}
           mt={2.5}
         >
-          {listComment.length > 0
-            ? listComment.length + " Bình luận"
+          {comments && comments.length > 0
+            ? comments.length + " Bình luận"
             : "Chưa có bình luận nào"}
         </Typography>
       </Stack>
 
-      {listComment.map((item) => {
-        return <CommentItem key={item._id} item={item} />;
-      })}
+      {comments &&
+        comments.map((item, index) => {
+          return <CommentItem key={index} item={item} />;
+        })}
 
       <Stack
         width={"100%"}
@@ -181,14 +256,41 @@ export default function BinhLuan() {
         </Typography>
 
         <TextField
+          value={dataComment.content}
+          onChange={(e) => {
+            setDataComment({ ...dataComment, content: e.target.value });
+          }}
           label="Nhập bình luận của bạn"
           multiline
           rows={5}
+          error={validateForm.content}
+          helperText={validateForm.helperTextContent}
         />
 
-        <TextField label="Tên của bạn" />
+        <TextField
+          error={validateForm.name}
+          value={dataComment.name}
+          onChange={(e) => {
+            setDataComment({ ...dataComment, name: e.target.value });
+          }}
+          label="Tên của bạn"
+          helperText={validateForm.helperTextName}
+        />
 
-        <TextField label="Email của bạn" />
+        <TextField
+          error={validateForm.email}
+          value={dataComment.email}
+          onChange={(e) => {
+            setDataComment({ ...dataComment, email: e.target.value });
+          }}
+          label="Email của bạn"
+          helperText={validateForm.helperTextEmail}
+        />
+
+        <ReCAPTCHA
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Thay YOUR_SITE_KEY bằng khóa công khai bạn nhận được từ reCAPTCHA
+          onChange={(value) => setCaptchaValue(value)}
+        />
 
         <Button
           sx={{
@@ -199,7 +301,7 @@ export default function BinhLuan() {
             fontSize: "1rem",
             fontFamily: "Open Sans",
           }}
-          onClick={() => {}}
+          onClick={handleComment}
         >
           Gửi bình luận
         </Button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -9,6 +9,10 @@ import Fab from "@mui/material/Fab";
 import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import { styled } from "@mui/system";
 import ButtonCustom from "../ButtonCustom";
+import baiVietAPI from "../../api/BaiVietAPI";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from "react";
+import { FormHelperText } from "@mui/material";
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -21,19 +25,69 @@ const CustomTextField = styled(TextField)({
 
 const withDialog = (WrappedComponent) => {
   return function WithDialog(props) {
+    const captchaRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [nameError, setNameError] = useState(false);
     const [content, setContent] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [contentError, setContentError] = useState(false);
-
+    const [recaptchaError, setRecaptchaError] = useState(false);
+    const [type, setType] = useState("contribute");
     const handleClickOpen = () => {
       setOpen(true);
     };
 
-    const handleClose = () => {
+    useEffect(() => {
+      if (open) {
+        setRecaptchaError("");
+      }
+    }, [open]);
+
+    //call api
+    const handleCreateComment = async (
+      tokenCaptcha,
+      name,
+      slug,
+      email,
+      content,
+      type
+    ) => {
+      const data = {
+        tokenCaptcha: tokenCaptcha,
+        name: name,
+        slug: slug,
+        email: email,
+        content: content,
+        type: type,
+      };
+      try {
+        const response = await baiVietAPI.createComment(data);
+        if (response.status === 201) {
+          alert(
+            "Gửi thành công! Chân thành cảm ơn bạn đã đóng góp ý kiến của mình🍀"
+          );
+          setOpen(false);
+          setEmail("");
+          setContent("");
+          setName("");
+          captchaRef.current.reset();
+        } else {
+          alert("Gửi thất bại, vui lòng thử lại sau");
+        }
+      } catch (err) {
+        console.log(err);
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+      } finally {
+        captchaRef.current.reset();
+      }
+    };
+
+    const handleClose = async () => {
       if (validateForm()) {
-        setOpen(false);
+        const token = captchaRef.current.getValue();
+        handleCreateComment(token, name, "", email, content, type, "1");
       }
     };
 
@@ -54,6 +108,13 @@ const withDialog = (WrappedComponent) => {
         setContentError(false);
       }
 
+      if (!name || !name.length > 0) {
+        setNameError(true);
+        isValid = false;
+      } else {
+        setNameError(false);
+      }
+
       return isValid;
     };
 
@@ -65,18 +126,33 @@ const withDialog = (WrappedComponent) => {
           {...props}
         />
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Hi 👋!</DialogTitle>
+          <DialogTitle>Xin chào 👋!</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Nếu có bất kỳ câu hỏi, thắc mắc về bất cứ vấn đề hi vọng🌟 bạn sẽ
               đóng góp để Chung ngày càng hoàn thiện hơn nữa nhé🔥.<br></br>{" "}
-              Trân trọng cảm ơn, biết ơn 😇🍀. Chúc bạn có một ngày tốt lành🐧
+              Trân trọng cảm ơn, biết ơn 😇. Chúc bạn có một ngày tốt lành🐧
             </DialogContentText>
+
+            <CustomTextField
+              margin="dense"
+              id="content"
+              label="Tên của bạn"
+              type="text"
+              fullWidth
+              variant="standard"
+              error={nameError}
+              helperText={nameError ? "Tên không hợp lệ" : ""}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+
             <CustomTextField
               autoFocus={true}
               margin="dense"
               id="email"
-              label="Email của bạn"
+              label="Email của bạn (Sẽ được mình giữ bí mật)"
               type="email"
               fullWidth
               variant="standard"
@@ -103,6 +179,14 @@ const withDialog = (WrappedComponent) => {
               onChange={(e) => setContent(e.target.value)}
               required
             />
+
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Thay YOUR_SITE_KEY bằng khóa công khai bạn nhận được từ reCAPTCHA
+            />
+            <FormHelperText error={recaptchaError ? true : false}>
+              {recaptchaError ? "Vui lòng xác nhận reCAPTCHA" : ""}
+            </FormHelperText>
           </DialogContent>
           <DialogActions>
             <ButtonCustom
@@ -110,9 +194,11 @@ const withDialog = (WrappedComponent) => {
               onClick={() => {
                 setEmail("");
                 setContent("");
+                setName("");
                 setOpen(false);
                 setEmailError(false);
                 setContentError(false);
+                setNameError(false);
               }}
             />
 
