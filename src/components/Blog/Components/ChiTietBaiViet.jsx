@@ -6,7 +6,7 @@ import { useMainValues } from "../../../contexts/MainContext";
 import { useLocation } from "react-router-dom";
 import Secondary from "./Secondary";
 import { useEffect } from "react";
-import baiVietAPI from "../../../api/BaiVietAPI";
+import blogAPI from "../../../api/BlogAPI";
 
 function ChiTietBaiViet() {
   const { pathname } = useLocation();
@@ -18,7 +18,7 @@ function ChiTietBaiViet() {
   useEffect(() => {
     const fetchDataChiTietBaiVietSlug = async () => {
       try {
-        const response = await baiVietAPI.getPostBySlug(slug);
+        const response = await blogAPI.getPostBySlug(slug);
         if (response.status === 200) {
           setDataChiTiet(response.data.result);
         }

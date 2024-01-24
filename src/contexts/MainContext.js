@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { useMediaQuery } from "@mui/material";
-import courseAPI from "../api/CourseAPI";
+import courseAPI from "../api/BlogAPI";
 import podcastAPI from "../api/PodcastAPI";
 
 const MainContext = createContext();
