@@ -4,7 +4,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import MarkDown from "./MarkDown";
 
-export default function NoiDungBaiViet({ content }) {
+export default function NoiDungBaiViet({ slug, content }) {
   return (
     <React.Fragment>
       <CssBaseline />
@@ -89,6 +89,31 @@ export default function NoiDungBaiViet({ content }) {
           </Stack>
 
           <MarkDown markdown={content?.content} type={"content"} />
+
+          <div
+            className="fb-like"
+            data-href={`http://192.168.1.220:3000/blog/${slug}`}
+            data-width=""
+            data-layout="button_count"
+            data-action="like"
+            data-size="small"
+            data-share="true"
+          ></div>
+          {/* 
+          <iframe
+            title="Facebook Like Button"
+            src={`https://www.facebook.com/plugins/like.php?href=http%3A%2F%2F192.168.1.220%3A3000%2Fblog%2F${slug}&width=100&layout&action&size&share=true&height=35&appId=${process.env.REACT_APP_APPID_FB}`}
+            width="100"
+            height="35"
+            style={{
+              width: "100%",
+              border: "none",
+              overflow: "hidden",
+              frameborder: "0",
+            }}
+            scrolling="no"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          ></iframe> */}
         </Stack>
       </Stack>
     </React.Fragment>
