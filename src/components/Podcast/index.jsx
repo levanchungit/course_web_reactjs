@@ -1,45 +1,12 @@
 import * as React from "react";
 import { Grid, Stack, Typography } from "@mui/material";
-import { LIST_LOAT_BAI } from "../../constants/appConstants";
 import LoatBaiItem from "./components/LoatBaiItem";
 import ButtonCustom from "../ButtonCustom";
 import { useMainValues } from "../../contexts/MainContext";
 import LoatBaiList from "./components/TapGanDayList";
-import courseAPI from "../../api/CourseAPI";
-import podcastAPI from "../../api/PodcastAPI";
-// import getYoutubeVideos from "../../utils/youtubeApi";
 
 export default function Podcast() {
-  const { isMediumScreen } = useMainValues();
-  const [dataLoatBai, setDataLoatBai] = React.useState([]);
-  const [dataVideos, setDataVideos] = React.useState([]);
-
-  React.useEffect(() => {
-    const fetchDataLoatBai = async () => {
-      try {
-        const response = await courseAPI.getCourses();
-        if (response.status === 200) {
-          setDataLoatBai(response.data.results);
-        }
-      } catch (e) {
-        console.log("error: ", e);
-      }
-    };
-
-    const fetchDataVideos = async () => {
-      try {
-        const response = await podcastAPI.getVideos(1, 10, "desc");
-        if (response.status === 200) {
-          setDataVideos(response.data.results);
-        }
-      } catch (e) {
-        console.log("error: ", e);
-      }
-    };
-
-    fetchDataLoatBai();
-    fetchDataVideos();
-  }, []);
+  const { isMediumScreen, dataLoatBai, dataVideos } = useMainValues();
 
   return (
     <div className="App">
