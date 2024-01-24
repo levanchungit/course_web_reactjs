@@ -92,7 +92,7 @@ export default function NoiDungBaiViet({ slug, content }) {
 
           <div
             className="fb-like"
-            data-href={`http://192.168.1.220:3000/blog/${slug}`}
+            data-href={`https://www.levanchung.tech/blog/${slug}`}
             data-width=""
             data-layout="button_count"
             data-action="like"
