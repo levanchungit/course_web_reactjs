@@ -9,10 +9,10 @@ import Fab from "@mui/material/Fab";
 import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import { styled } from "@mui/system";
 import ButtonCustom from "../ButtonCustom";
-import baiVietAPI from "../../api/BaiVietAPI";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { FormHelperText } from "@mui/material";
+import blogAPI from "../../api/BlogAPI";
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -63,7 +63,7 @@ const withDialog = (WrappedComponent) => {
         type: type,
       };
       try {
-        const response = await baiVietAPI.createComment(data);
+        const response = await blogAPI.createComment(data);
         if (response.status === 201) {
           alert(
             "Gửi thành công! Chân thành cảm ơn bạn đã đóng góp ý kiến của mình🍀"

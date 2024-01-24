@@ -3,10 +3,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Stack, Typography, TextField } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
-import baiVietAPI from "../../../api/BaiVietAPI";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { formatDateTime } from "../../../utils/common";
+import blogAPI from "../../../api/BlogAPI";
 
 export default function BinhLuan({ slug, comments }) {
   const [captchaValue, setCaptchaValue] = useState("");
@@ -184,7 +184,7 @@ export default function BinhLuan({ slug, comments }) {
     };
 
     try {
-      const response = await baiVietAPI.createComment(data);
+      const response = await blogAPI.createComment(data);
       if (response.status === 201) {
         alert("Gửi bình luận thành công");
       } else {

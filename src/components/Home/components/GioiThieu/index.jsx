@@ -9,7 +9,7 @@ import {
 } from "@mui/icons-material/";
 import { URL_INFO } from "../../../../constants/appConstants";
 import { useMainValues } from "../../../../contexts/MainContext";
-import tacGiaAPI from "../../../../api/TacGiaAPI";
+import blogAPI from "../../../../api/BlogAPI";
 
 export default function GioiThieu(props) {
   const { isSmallScreen, isMediumScreen } = useMainValues();
@@ -32,7 +32,7 @@ export default function GioiThieu(props) {
   React.useEffect(() => {
     const fetchDataAuthor = async () => {
       try {
-        const response = await tacGiaAPI.getAuthor();
+        const response = await blogAPI.getAuthor();
         if (response.status === 200) {
           setDataTacGia(response.data.result);
         }

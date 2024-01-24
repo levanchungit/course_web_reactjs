@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { LIST_LOAT_BAI } from "../../../../constants/appConstants";
 import LoatBaiItem from "../LoatBaiItem";
-import courseAPI from "../../../../api/CourseAPI";
+import blogAPI from "../../../../api/BlogAPI";
 
 export default function LoatBaiList(props) {
   const [dataLoatBai, setDataLoatBai] = React.useState([]);
@@ -9,7 +8,7 @@ export default function LoatBaiList(props) {
   useEffect(() => {
     const fetchDataLoatBai = async () => {
       try {
-        const response = await courseAPI.getCourses();
+        const response = await blogAPI.getCourses();
         if (response.status === 200) {
           setDataLoatBai(response.data.results);
         }

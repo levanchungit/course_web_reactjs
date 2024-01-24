@@ -3,10 +3,9 @@ import Footer from "./Components/Footer";
 import { Button, Skeleton, Stack, Typography } from "@mui/material";
 import { useMainValues } from "../../contexts/MainContext";
 import ItemDanhSachBaiViet from "./Components/ItemDanhSachBaiViet";
-import authAPI from "../../api/BaiVietAPI";
 import Secondary from "./Components/Secondary";
 import { useState } from "react";
-import { useEffect } from "react";
+import blogAPI from "../../api/BlogAPI";
 
 function Blog() {
   const { isMediumScreen } = useMainValues();
@@ -21,7 +20,7 @@ function Blog() {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await authAPI.getPosts(
+      const response = await blogAPI.getPosts(
         currentPage,
         limitPost,
         sortPost,

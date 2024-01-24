@@ -1,12 +1,9 @@
 import * as React from "react";
 import {
   Button,
-  FormControl,
   IconButton,
   Input,
   InputAdornment,
-  InputLabel,
-  OutlinedInput,
   Stack,
   Typography,
 } from "@mui/material";
@@ -16,11 +13,9 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { useMainValues } from "../../../contexts/MainContext";
 import { Search } from "@mui/icons-material";
-import tacGiaAPI from "../../../api/TacGiaAPI";
-import theLoaiAPI from "../../../api/TheLoaiAPI";
-import baiVietAPI from "../../../api/BaiVietAPI";
 import { Link } from "react-router-dom";
 import { formatDateTime } from "../../../utils/common";
+import blogAPI from "../../../api/BlogAPI";
 
 export default function Secondary({ fetchData, searchKey, setSearchKey }) {
   const { isMediumScreen } = useMainValues();
@@ -48,7 +43,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
   React.useEffect(() => {
     const fetchDataAuthor = async () => {
       try {
-        const response = await tacGiaAPI.getAuthor();
+        const response = await blogAPI.getAuthor();
         if (response.status === 200) {
           setDataTacGia(response.data.result);
         }
@@ -59,7 +54,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
 
     const fetchDataCategories = async () => {
       try {
-        const response = await theLoaiAPI.getCategories();
+        const response = await blogAPI.getCategories();
         if (response.status === 200) {
           setDataDanhMuc(response.data.results);
         }
@@ -70,7 +65,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
 
     const fetchDataPostsPopular = async () => {
       try {
-        const response = await baiVietAPI.getPostsPopular();
+        const response = await blogAPI.getPostsPopular();
         if (response.status === 200) {
           setDataBaiVietNoiBat(response.data.results);
         }
@@ -81,7 +76,7 @@ export default function Secondary({ fetchData, searchKey, setSearchKey }) {
 
     const fetchDataRecentActivity = async () => {
       try {
-        const response = await baiVietAPI.getRecentActivity();
+        const response = await blogAPI.getRecentActivity();
         if (response.status === 200) {
           setDataHoatDong(response.data.results);
         }
