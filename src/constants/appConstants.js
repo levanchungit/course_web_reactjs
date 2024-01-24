@@ -9,13 +9,6 @@ export const IMG_URL_LB_HVBT =
 export const IMG_URL_GIOI_THIEU =
   "https://res.cloudinary.com/ddfyyysdw/image/upload/v1700488247/hmikqxxfgizfjzjfc1qa.png";
 
-export const URL_INFO = {
-  facebook: "https://www.facebook.com/levanchung.it/",
-  youtube: "https://www.youtube.com/channel/UCFtjqY-6-Yq9HLG13qT_g_g",
-  port_folio: "https://levanchung.tech/",
-  linkedin: "https://www.linkedin.com/in/levanchung/",
-};
-
 export const MENU_ITEMS = [
   {
     name: "Trang chủ",

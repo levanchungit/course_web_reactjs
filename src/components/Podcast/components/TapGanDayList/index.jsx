@@ -1,10 +1,8 @@
 import * as React from "react";
 import TapGanDayItem from "../TapGanDayItem";
 import { Grid } from "@mui/material";
-import { useMainValues } from "../../../../contexts/MainContext";
 
 export default function LoatBaiList({ dataVideos }) {
-  const { isMediumScreen } = useMainValues();
   return (
     <React.Fragment>
       <Grid
@@ -13,7 +11,6 @@ export default function LoatBaiList({ dataVideos }) {
         alignContent={"center"}
         spacing={2}
       >
-        {/* bỏ video[0] ra */}
         {dataVideos &&
           dataVideos.length > 0 &&
           dataVideos.slice(1).map((item, key) => {

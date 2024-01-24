@@ -6,8 +6,8 @@ import {
   LinkedIn,
   YouTube,
   Instagram,
+  Info,
 } from "@mui/icons-material/";
-import { URL_INFO } from "../../../../constants/appConstants";
 import { useMainValues } from "../../../../contexts/MainContext";
 import blogAPI from "../../../../api/BlogAPI";
 
@@ -191,31 +191,30 @@ export default function GioiThieu(props) {
                 </Link>
               )}
 
-              <Link target="_blank" href={URL_INFO.port_folio} underline="none">
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  width={"52px"}
-                  height={"52px"}
-                  borderRadius={"50%"}
-                  p={"10px"}
-                  border={"2px solid #D2302C"}
+              {console.log(dataTacGia.author)}
+
+              {dataTacGia.author.portfolio && (
+                <Link
+                  target="_blank"
+                  href={dataTacGia.author.portfolio}
+                  underline="none"
                 >
-                  <Typography
-                    sx={{
-                      fontSize: "10px",
-                      width: "2rem",
-                      height: "2rem",
-                      color: "#D2302C",
-                    }}
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    width={"52px"}
+                    height={"52px"}
+                    borderRadius={"50%"}
+                    p={"10px"}
+                    border={"2px solid #D2302C"}
                   >
-                    Port
-                    <br />
-                    Folio
-                  </Typography>
-                </Box>
-              </Link>
+                    <Info
+                      sx={{ width: "2rem", height: "2rem", color: "#D2302C" }}
+                    />
+                  </Box>
+                </Link>
+              )}
             </Stack>
           </Stack>
         </Stack>
