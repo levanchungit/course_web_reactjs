@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Stack } from "@mui/material";
 import BinhLuan from "./BinhLuan";
-import NoiDungBaiViet from "./NoiDungBaiViet";
 import { useMainValues } from "../../../contexts/MainContext";
 import { useLocation } from "react-router-dom";
 import Secondary from "./Secondary";
 import { useEffect } from "react";
 import blogAPI from "../../../api/BlogAPI";
+import { NoiDungBaiViet } from "./NoiDungBaiViet";
 
 function ChiTietBaiViet() {
   const { pathname } = useLocation();
