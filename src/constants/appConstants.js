@@ -41,10 +41,14 @@ export const MENU_ITEMS = [
     url: "/#",
     visible: false,
   },
-
   {
     name: "Blog",
     url: "/blog",
+    visible: true,
+  },
+  {
+    name: "Thông tin",
+    url: "/credit",
     visible: true,
   },
 ];

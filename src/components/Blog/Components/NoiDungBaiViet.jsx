@@ -4,7 +4,10 @@ import { Button, Stack, Typography } from "@mui/material";
 import { formatDateTime } from "../../../utils/common";
 import MarkDown from "./MarkDown";
 import { Component } from "react";
-
+import {
+  FacebookShareButton,
+  FacebookIcon,
+} from "react-share";
 export class NoiDungBaiViet extends Component {
   constructor() {
     super();
@@ -124,16 +127,14 @@ export class NoiDungBaiViet extends Component {
 
             <MarkDown markdown={content?.content} type={"content"} />
 
-            {/* <!-- Your like button code --> */}
-            {/* <div
-              className="fb-like"
-              data-href={window.location.href}
-              data-width="500"
-              data-layout=""
-              data-action=""
-              data-size=""
-              data-share="true"
-            ></div> */}
+            <FacebookShareButton
+              style={{ width: "70px" }}
+              url={window.location.href}
+              quote={"Helllo"}
+              title={"Good morning"}
+            >
+              <FacebookIcon size={40} round={true} />
+            </FacebookShareButton>
           </Stack>
         </Stack>
       </React.Fragment>
