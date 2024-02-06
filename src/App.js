@@ -9,6 +9,7 @@ import ChiTietBaiViet from "./components/Blog/Components/ChiTietBaiViet";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MainProvider } from "./contexts/MainContext";
+import Credit from "./components/Credit";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/credit" element={<Credit />} />
             <Route path="/blog/:slug" element={<ChiTietBaiViet />} />
           </Routes>
           <FabHoiDap />

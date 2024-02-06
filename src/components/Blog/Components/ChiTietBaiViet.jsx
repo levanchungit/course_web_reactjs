@@ -51,7 +51,7 @@ function ChiTietBaiViet() {
             alignItems={"center"}
           >
             <NoiDungBaiViet content={dataChiTiet} />
-            <BinhLuan slug={slug} comments={dataChiTiet?.comments} />
+            <BinhLuan slug={slug} content={dataChiTiet} />
           </Stack>
           <Secondary />
         </Stack>
